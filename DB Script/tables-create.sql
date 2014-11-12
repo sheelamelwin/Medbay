@@ -1,0 +1,2933 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               5.6.21 - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Version:             8.3.0.4694
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Dumping structure for table broadleaf.blc_additional_offer_info
+CREATE TABLE IF NOT EXISTS `blc_additional_offer_info` (
+  `BLC_ORDER_ORDER_ID` bigint(20) NOT NULL,
+  `OFFER_INFO_ID` bigint(20) NOT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`BLC_ORDER_ORDER_ID`,`OFFER_ID`),
+  KEY `FK3BFDBD63B5D9C34D` (`OFFER_INFO_ID`),
+  KEY `FK3BFDBD63D5F3FAF4` (`OFFER_ID`),
+  KEY `FK3BFDBD631891FF79` (`BLC_ORDER_ORDER_ID`),
+  CONSTRAINT `FK3BFDBD631891FF79` FOREIGN KEY (`BLC_ORDER_ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FK3BFDBD63B5D9C34D` FOREIGN KEY (`OFFER_INFO_ID`) REFERENCES `blc_offer_info` (`OFFER_INFO_ID`),
+  CONSTRAINT `FK3BFDBD63D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_address
+CREATE TABLE IF NOT EXISTS `blc_address` (
+  `ADDRESS_ID` bigint(20) NOT NULL,
+  `ADDRESS_LINE1` varchar(255) NOT NULL,
+  `ADDRESS_LINE2` varchar(255) DEFAULT NULL,
+  `ADDRESS_LINE3` varchar(255) DEFAULT NULL,
+  `CITY` varchar(255) NOT NULL,
+  `COMPANY_NAME` varchar(255) DEFAULT NULL,
+  `COUNTY` varchar(255) DEFAULT NULL,
+  `EMAIL_ADDRESS` varchar(255) DEFAULT NULL,
+  `FAX` varchar(255) DEFAULT NULL,
+  `FIRST_NAME` varchar(255) DEFAULT NULL,
+  `IS_ACTIVE` tinyint(1) DEFAULT NULL,
+  `IS_BUSINESS` tinyint(1) DEFAULT NULL,
+  `IS_DEFAULT` tinyint(1) DEFAULT NULL,
+  `LAST_NAME` varchar(255) DEFAULT NULL,
+  `POSTAL_CODE` varchar(255) NOT NULL,
+  `PRIMARY_PHONE` varchar(255) DEFAULT NULL,
+  `SECONDARY_PHONE` varchar(255) DEFAULT NULL,
+  `STANDARDIZED` tinyint(1) DEFAULT NULL,
+  `TOKENIZED_ADDRESS` varchar(255) DEFAULT NULL,
+  `VERIFICATION_LEVEL` varchar(255) DEFAULT NULL,
+  `ZIP_FOUR` varchar(255) DEFAULT NULL,
+  `COUNTRY` varchar(255) NOT NULL,
+  `PHONE_FAX_ID` bigint(20) DEFAULT NULL,
+  `PHONE_PRIMARY_ID` bigint(20) DEFAULT NULL,
+  `PHONE_SECONDARY_ID` bigint(20) DEFAULT NULL,
+  `STATE_PROV_REGION` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ADDRESS_ID`),
+  KEY `ADDRESS_COUNTRY_INDEX` (`COUNTRY`),
+  KEY `ADDRESS_PHONE_FAX_IDX` (`PHONE_FAX_ID`),
+  KEY `ADDRESS_PHONE_PRI_IDX` (`PHONE_PRIMARY_ID`),
+  KEY `ADDRESS_PHONE_SEC_IDX` (`PHONE_SECONDARY_ID`),
+  KEY `ADDRESS_STATE_INDEX` (`STATE_PROV_REGION`),
+  KEY `FK299F86CEA46E16CF` (`COUNTRY`),
+  KEY `FK299F86CEF1A6533F` (`PHONE_FAX_ID`),
+  KEY `FK299F86CEBF4449BA` (`PHONE_PRIMARY_ID`),
+  KEY `FK299F86CEE12DC0C8` (`PHONE_SECONDARY_ID`),
+  KEY `FK299F86CE337C4D50` (`STATE_PROV_REGION`),
+  CONSTRAINT `FK299F86CE337C4D50` FOREIGN KEY (`STATE_PROV_REGION`) REFERENCES `blc_state` (`ABBREVIATION`),
+  CONSTRAINT `FK299F86CEA46E16CF` FOREIGN KEY (`COUNTRY`) REFERENCES `blc_country` (`ABBREVIATION`),
+  CONSTRAINT `FK299F86CEBF4449BA` FOREIGN KEY (`PHONE_PRIMARY_ID`) REFERENCES `blc_phone` (`PHONE_ID`),
+  CONSTRAINT `FK299F86CEE12DC0C8` FOREIGN KEY (`PHONE_SECONDARY_ID`) REFERENCES `blc_phone` (`PHONE_ID`),
+  CONSTRAINT `FK299F86CEF1A6533F` FOREIGN KEY (`PHONE_FAX_ID`) REFERENCES `blc_phone` (`PHONE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_module
+CREATE TABLE IF NOT EXISTS `blc_admin_module` (
+  `ADMIN_MODULE_ID` bigint(20) NOT NULL,
+  `DISPLAY_ORDER` int(11) DEFAULT NULL,
+  `ICON` varchar(255) DEFAULT NULL,
+  `MODULE_KEY` varchar(255) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`ADMIN_MODULE_ID`),
+  KEY `ADMINMODULE_NAME_INDEX` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_password_token
+CREATE TABLE IF NOT EXISTS `blc_admin_password_token` (
+  `PASSWORD_TOKEN` varchar(255) NOT NULL,
+  `ADMIN_USER_ID` bigint(20) NOT NULL,
+  `CREATE_DATE` datetime NOT NULL,
+  `TOKEN_USED_DATE` datetime DEFAULT NULL,
+  `TOKEN_USED_FLAG` tinyint(1) NOT NULL,
+  PRIMARY KEY (`PASSWORD_TOKEN`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_permission
+CREATE TABLE IF NOT EXISTS `blc_admin_permission` (
+  `ADMIN_PERMISSION_ID` bigint(20) NOT NULL,
+  `DESCRIPTION` varchar(255) NOT NULL,
+  `IS_FRIENDLY` tinyint(1) DEFAULT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `PERMISSION_TYPE` varchar(255) NOT NULL,
+  PRIMARY KEY (`ADMIN_PERMISSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_permission_entity
+CREATE TABLE IF NOT EXISTS `blc_admin_permission_entity` (
+  `ADMIN_PERMISSION_ENTITY_ID` bigint(20) NOT NULL,
+  `CEILING_ENTITY` varchar(255) NOT NULL,
+  `ADMIN_PERMISSION_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ADMIN_PERMISSION_ENTITY_ID`),
+  KEY `FK23C09E3DE88B7D38` (`ADMIN_PERMISSION_ID`),
+  CONSTRAINT `FK23C09E3DE88B7D38` FOREIGN KEY (`ADMIN_PERMISSION_ID`) REFERENCES `blc_admin_permission` (`ADMIN_PERMISSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_permission_xref
+CREATE TABLE IF NOT EXISTS `blc_admin_permission_xref` (
+  `CHILD_PERMISSION_ID` bigint(20) NOT NULL,
+  `ADMIN_PERMISSION_ID` bigint(20) NOT NULL,
+  KEY `FKBCAD1F5E88B7D38` (`ADMIN_PERMISSION_ID`),
+  KEY `FKBCAD1F575A3C445` (`CHILD_PERMISSION_ID`),
+  CONSTRAINT `FKBCAD1F575A3C445` FOREIGN KEY (`CHILD_PERMISSION_ID`) REFERENCES `blc_admin_permission` (`ADMIN_PERMISSION_ID`),
+  CONSTRAINT `FKBCAD1F5E88B7D38` FOREIGN KEY (`ADMIN_PERMISSION_ID`) REFERENCES `blc_admin_permission` (`ADMIN_PERMISSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_role
+CREATE TABLE IF NOT EXISTS `blc_admin_role` (
+  `ADMIN_ROLE_ID` bigint(20) NOT NULL,
+  `DESCRIPTION` varchar(255) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`ADMIN_ROLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_role_permission_xref
+CREATE TABLE IF NOT EXISTS `blc_admin_role_permission_xref` (
+  `ADMIN_ROLE_ID` bigint(20) NOT NULL,
+  `ADMIN_PERMISSION_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ADMIN_PERMISSION_ID`,`ADMIN_ROLE_ID`),
+  KEY `FK4A819D98E88B7D38` (`ADMIN_PERMISSION_ID`),
+  KEY `FK4A819D985F43AAD8` (`ADMIN_ROLE_ID`),
+  CONSTRAINT `FK4A819D985F43AAD8` FOREIGN KEY (`ADMIN_ROLE_ID`) REFERENCES `blc_admin_role` (`ADMIN_ROLE_ID`),
+  CONSTRAINT `FK4A819D98E88B7D38` FOREIGN KEY (`ADMIN_PERMISSION_ID`) REFERENCES `blc_admin_permission` (`ADMIN_PERMISSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_section
+CREATE TABLE IF NOT EXISTS `blc_admin_section` (
+  `ADMIN_SECTION_ID` bigint(20) NOT NULL,
+  `CEILING_ENTITY` varchar(255) DEFAULT NULL,
+  `DISPLAY_CONTROLLER` varchar(255) DEFAULT NULL,
+  `DISPLAY_ORDER` int(11) DEFAULT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `SECTION_KEY` varchar(255) NOT NULL,
+  `URL` varchar(255) DEFAULT NULL,
+  `USE_DEFAULT_HANDLER` tinyint(1) DEFAULT NULL,
+  `ADMIN_MODULE_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ADMIN_SECTION_ID`),
+  UNIQUE KEY `uc_BLC_ADMIN_SECTION_1` (`SECTION_KEY`),
+  KEY `ADMINSECTION_MODULE_INDEX` (`ADMIN_MODULE_ID`),
+  KEY `ADMINSECTION_NAME_INDEX` (`NAME`),
+  KEY `FK7EA7D92FB1A18498` (`ADMIN_MODULE_ID`),
+  CONSTRAINT `FK7EA7D92FB1A18498` FOREIGN KEY (`ADMIN_MODULE_ID`) REFERENCES `blc_admin_module` (`ADMIN_MODULE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_sec_perm_xref
+CREATE TABLE IF NOT EXISTS `blc_admin_sec_perm_xref` (
+  `ADMIN_SECTION_ID` bigint(20) NOT NULL,
+  `ADMIN_PERMISSION_ID` bigint(20) NOT NULL,
+  KEY `FK5E832966E88B7D38` (`ADMIN_PERMISSION_ID`),
+  KEY `FK5E8329663AF7F0FC` (`ADMIN_SECTION_ID`),
+  CONSTRAINT `FK5E8329663AF7F0FC` FOREIGN KEY (`ADMIN_SECTION_ID`) REFERENCES `blc_admin_section` (`ADMIN_SECTION_ID`),
+  CONSTRAINT `FK5E832966E88B7D38` FOREIGN KEY (`ADMIN_PERMISSION_ID`) REFERENCES `blc_admin_permission` (`ADMIN_PERMISSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_user
+CREATE TABLE IF NOT EXISTS `blc_admin_user` (
+  `ADMIN_USER_ID` bigint(20) NOT NULL,
+  `ACTIVE_STATUS_FLAG` tinyint(1) DEFAULT NULL,
+  `EMAIL` varchar(255) NOT NULL,
+  `LOGIN` varchar(255) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `PHONE_NUMBER` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ADMIN_USER_ID`),
+  KEY `ADMINPERM_EMAIL_INDEX` (`EMAIL`),
+  KEY `ADMINUSER_NAME_INDEX` (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_user_addtl_fields
+CREATE TABLE IF NOT EXISTS `blc_admin_user_addtl_fields` (
+  `ADMIN_USER_ID` bigint(20) NOT NULL,
+  `FIELD_VALUE` varchar(255) DEFAULT NULL,
+  `FIELD_NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`ADMIN_USER_ID`,`FIELD_NAME`),
+  KEY `FK73274CDD46EBC38` (`ADMIN_USER_ID`),
+  CONSTRAINT `FK73274CDD46EBC38` FOREIGN KEY (`ADMIN_USER_ID`) REFERENCES `blc_admin_user` (`ADMIN_USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_user_permission_xref
+CREATE TABLE IF NOT EXISTS `blc_admin_user_permission_xref` (
+  `ADMIN_USER_ID` bigint(20) NOT NULL,
+  `ADMIN_PERMISSION_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ADMIN_PERMISSION_ID`,`ADMIN_USER_ID`),
+  KEY `FKF0B3BEEDE88B7D38` (`ADMIN_PERMISSION_ID`),
+  KEY `FKF0B3BEED46EBC38` (`ADMIN_USER_ID`),
+  CONSTRAINT `FKF0B3BEED46EBC38` FOREIGN KEY (`ADMIN_USER_ID`) REFERENCES `blc_admin_user` (`ADMIN_USER_ID`),
+  CONSTRAINT `FKF0B3BEEDE88B7D38` FOREIGN KEY (`ADMIN_PERMISSION_ID`) REFERENCES `blc_admin_permission` (`ADMIN_PERMISSION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_user_role_xref
+CREATE TABLE IF NOT EXISTS `blc_admin_user_role_xref` (
+  `ADMIN_USER_ID` bigint(20) NOT NULL,
+  `ADMIN_ROLE_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ADMIN_ROLE_ID`,`ADMIN_USER_ID`),
+  KEY `FKFFD33A265F43AAD8` (`ADMIN_ROLE_ID`),
+  KEY `FKFFD33A2646EBC38` (`ADMIN_USER_ID`),
+  CONSTRAINT `FKFFD33A2646EBC38` FOREIGN KEY (`ADMIN_USER_ID`) REFERENCES `blc_admin_user` (`ADMIN_USER_ID`),
+  CONSTRAINT `FKFFD33A265F43AAD8` FOREIGN KEY (`ADMIN_ROLE_ID`) REFERENCES `blc_admin_role` (`ADMIN_ROLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_admin_user_sandbox
+CREATE TABLE IF NOT EXISTS `blc_admin_user_sandbox` (
+  `SANDBOX_ID` bigint(20) DEFAULT NULL,
+  `ADMIN_USER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ADMIN_USER_ID`),
+  KEY `FKD0A97E09579FE59D` (`SANDBOX_ID`),
+  KEY `FKD0A97E0946EBC38` (`ADMIN_USER_ID`),
+  CONSTRAINT `FKD0A97E0946EBC38` FOREIGN KEY (`ADMIN_USER_ID`) REFERENCES `blc_admin_user` (`ADMIN_USER_ID`),
+  CONSTRAINT `FKD0A97E09579FE59D` FOREIGN KEY (`SANDBOX_ID`) REFERENCES `blc_sandbox` (`SANDBOX_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_asset_desc_map
+CREATE TABLE IF NOT EXISTS `blc_asset_desc_map` (
+  `STATIC_ASSET_ID` bigint(20) NOT NULL,
+  `STATIC_ASSET_DESC_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`STATIC_ASSET_ID`,`MAP_KEY`),
+  KEY `FKE886BAE3E2BA0C9D` (`STATIC_ASSET_DESC_ID`),
+  KEY `FKE886BAE367F70B63` (`STATIC_ASSET_ID`),
+  CONSTRAINT `FKE886BAE367F70B63` FOREIGN KEY (`STATIC_ASSET_ID`) REFERENCES `blc_static_asset` (`STATIC_ASSET_ID`),
+  CONSTRAINT `FKE886BAE3E2BA0C9D` FOREIGN KEY (`STATIC_ASSET_DESC_ID`) REFERENCES `blc_static_asset_desc` (`STATIC_ASSET_DESC_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_bundle_order_item
+CREATE TABLE IF NOT EXISTS `blc_bundle_order_item` (
+  `BASE_RETAIL_PRICE` decimal(19,5) DEFAULT NULL,
+  `BASE_SALE_PRICE` decimal(19,5) DEFAULT NULL,
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  `PRODUCT_BUNDLE_ID` bigint(20) DEFAULT NULL,
+  `SKU_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ID`),
+  KEY `FK489703DBCCF29B96` (`PRODUCT_BUNDLE_ID`),
+  KEY `FK489703DBB78C9977` (`SKU_ID`),
+  KEY `FK489703DB9AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK489703DB9AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK489703DBB78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`),
+  CONSTRAINT `FK489703DBCCF29B96` FOREIGN KEY (`PRODUCT_BUNDLE_ID`) REFERENCES `blc_product_bundle` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_bund_item_fee_price
+CREATE TABLE IF NOT EXISTS `blc_bund_item_fee_price` (
+  `BUND_ITEM_FEE_PRICE_ID` bigint(20) NOT NULL,
+  `AMOUNT` decimal(19,5) DEFAULT NULL,
+  `IS_TAXABLE` tinyint(1) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `REPORTING_CODE` varchar(255) DEFAULT NULL,
+  `BUND_ORDER_ITEM_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`BUND_ITEM_FEE_PRICE_ID`),
+  KEY `FK14267A943FC68307` (`BUND_ORDER_ITEM_ID`),
+  CONSTRAINT `FK14267A943FC68307` FOREIGN KEY (`BUND_ORDER_ITEM_ID`) REFERENCES `blc_bundle_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_candidate_fg_offer
+CREATE TABLE IF NOT EXISTS `blc_candidate_fg_offer` (
+  `CANDIDATE_FG_OFFER_ID` bigint(20) NOT NULL,
+  `DISCOUNTED_PRICE` decimal(19,5) DEFAULT NULL,
+  `FULFILLMENT_GROUP_ID` bigint(20) DEFAULT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CANDIDATE_FG_OFFER_ID`),
+  KEY `CANDIDATE_FG_INDEX` (`FULFILLMENT_GROUP_ID`),
+  KEY `CANDIDATE_FGOFFER_INDEX` (`OFFER_ID`),
+  KEY `FKCE785605028DC55` (`FULFILLMENT_GROUP_ID`),
+  KEY `FKCE78560D5F3FAF4` (`OFFER_ID`),
+  CONSTRAINT `FKCE785605028DC55` FOREIGN KEY (`FULFILLMENT_GROUP_ID`) REFERENCES `blc_fulfillment_group` (`FULFILLMENT_GROUP_ID`),
+  CONSTRAINT `FKCE78560D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_candidate_item_offer
+CREATE TABLE IF NOT EXISTS `blc_candidate_item_offer` (
+  `CANDIDATE_ITEM_OFFER_ID` bigint(20) NOT NULL,
+  `DISCOUNTED_PRICE` decimal(19,5) DEFAULT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`CANDIDATE_ITEM_OFFER_ID`),
+  KEY `CANDIDATE_ITEMOFFER_INDEX` (`OFFER_ID`),
+  KEY `CANDIDATE_ITEM_INDEX` (`ORDER_ITEM_ID`),
+  KEY `FK9EEE9B2D5F3FAF4` (`OFFER_ID`),
+  KEY `FK9EEE9B29AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK9EEE9B29AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK9EEE9B2D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_candidate_order_offer
+CREATE TABLE IF NOT EXISTS `blc_candidate_order_offer` (
+  `CANDIDATE_ORDER_OFFER_ID` bigint(20) NOT NULL,
+  `DISCOUNTED_PRICE` decimal(19,5) DEFAULT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  `ORDER_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`CANDIDATE_ORDER_OFFER_ID`),
+  KEY `CANDIDATE_ORDEROFFER_INDEX` (`OFFER_ID`),
+  KEY `CANDIDATE_ORDER_INDEX` (`ORDER_ID`),
+  KEY `FK61852289D5F3FAF4` (`OFFER_ID`),
+  KEY `FK6185228989FE8A02` (`ORDER_ID`),
+  CONSTRAINT `FK6185228989FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FK61852289D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_catalog
+CREATE TABLE IF NOT EXISTS `blc_catalog` (
+  `CATALOG_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CATALOG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_category
+CREATE TABLE IF NOT EXISTS `blc_category` (
+  `CATEGORY_ID` bigint(20) NOT NULL,
+  `ACTIVE_END_DATE` datetime DEFAULT NULL,
+  `ACTIVE_START_DATE` datetime DEFAULT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `DISPLAY_TEMPLATE` varchar(255) DEFAULT NULL,
+  `FULFILLMENT_TYPE` varchar(255) DEFAULT NULL,
+  `INVENTORY_TYPE` varchar(255) DEFAULT NULL,
+  `LONG_DESCRIPTION` longtext,
+  `NAME` varchar(255) NOT NULL,
+  `TAX_CODE` varchar(255) DEFAULT NULL,
+  `URL` varchar(255) DEFAULT NULL,
+  `URL_KEY` varchar(255) DEFAULT NULL,
+  `DEFAULT_PARENT_CATEGORY_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`CATEGORY_ID`),
+  KEY `CATEGORY_PARENT_INDEX` (`DEFAULT_PARENT_CATEGORY_ID`),
+  KEY `CATEGORY_NAME_INDEX` (`NAME`),
+  KEY `CATEGORY_URL_INDEX` (`URL`),
+  KEY `CATEGORY_URLKEY_INDEX` (`URL_KEY`),
+  KEY `FK55F82D44B177E6` (`DEFAULT_PARENT_CATEGORY_ID`),
+  CONSTRAINT `FK55F82D44B177E6` FOREIGN KEY (`DEFAULT_PARENT_CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_category_attribute
+CREATE TABLE IF NOT EXISTS `blc_category_attribute` (
+  `CATEGORY_ATTRIBUTE_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `SEARCHABLE` tinyint(1) DEFAULT NULL,
+  `VALUE` varchar(255) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CATEGORY_ATTRIBUTE_ID`),
+  KEY `CATEGORYATTRIBUTE_INDEX` (`CATEGORY_ID`),
+  KEY `CATEGORYATTRIBUTE_NAME_INDEX` (`NAME`),
+  KEY `FK4E441D4115D1A13D` (`CATEGORY_ID`),
+  CONSTRAINT `FK4E441D4115D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_category_image
+CREATE TABLE IF NOT EXISTS `blc_category_image` (
+  `CATEGORY_ID` bigint(20) NOT NULL,
+  `URL` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`CATEGORY_ID`,`NAME`),
+  KEY `FK27CF3E8015D1A13D` (`CATEGORY_ID`),
+  CONSTRAINT `FK27CF3E8015D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_category_media_map
+CREATE TABLE IF NOT EXISTS `blc_category_media_map` (
+  `BLC_CATEGORY_CATEGORY_ID` bigint(20) NOT NULL,
+  `MEDIA_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`BLC_CATEGORY_CATEGORY_ID`,`MAP_KEY`),
+  KEY `FKCD24B1066E4720E0` (`MEDIA_ID`),
+  KEY `FKCD24B106D786CEA2` (`BLC_CATEGORY_CATEGORY_ID`),
+  CONSTRAINT `FKCD24B1066E4720E0` FOREIGN KEY (`MEDIA_ID`) REFERENCES `blc_media` (`MEDIA_ID`),
+  CONSTRAINT `FKCD24B106D786CEA2` FOREIGN KEY (`BLC_CATEGORY_CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_category_product_xref
+CREATE TABLE IF NOT EXISTS `blc_category_product_xref` (
+  `CATEGORY_PRODUCT_ID` bigint(20) NOT NULL,
+  `DISPLAY_ORDER` decimal(10,6) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) NOT NULL,
+  `PRODUCT_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CATEGORY_PRODUCT_ID`),
+  KEY `FK635EB1A615D1A13D` (`CATEGORY_ID`),
+  KEY `FK635EB1A65F11A0B7` (`PRODUCT_ID`),
+  CONSTRAINT `FK635EB1A615D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK635EB1A65F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_category_xref
+CREATE TABLE IF NOT EXISTS `blc_category_xref` (
+  `CATEGORY_XREF_ID` bigint(20) NOT NULL,
+  `DISPLAY_ORDER` decimal(10,6) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) NOT NULL,
+  `SUB_CATEGORY_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CATEGORY_XREF_ID`),
+  KEY `FKE889733615D1A13D` (`CATEGORY_ID`),
+  KEY `FKE8897336D6D45DBE` (`SUB_CATEGORY_ID`),
+  CONSTRAINT `FKE889733615D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FKE8897336D6D45DBE` FOREIGN KEY (`SUB_CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_cat_search_facet_excl_xref
+CREATE TABLE IF NOT EXISTS `blc_cat_search_facet_excl_xref` (
+  `CAT_EXCL_SEARCH_FACET_ID` bigint(20) NOT NULL,
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `SEARCH_FACET_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`CAT_EXCL_SEARCH_FACET_ID`),
+  KEY `FK8361EF4E15D1A13D` (`CATEGORY_ID`),
+  KEY `FK8361EF4EB96B1C93` (`SEARCH_FACET_ID`),
+  CONSTRAINT `FK8361EF4E15D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK8361EF4EB96B1C93` FOREIGN KEY (`SEARCH_FACET_ID`) REFERENCES `blc_search_facet` (`SEARCH_FACET_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_cat_search_facet_xref
+CREATE TABLE IF NOT EXISTS `blc_cat_search_facet_xref` (
+  `CATEGORY_SEARCH_FACET_ID` bigint(20) NOT NULL,
+  `SEQUENCE` decimal(19,2) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `SEARCH_FACET_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`CATEGORY_SEARCH_FACET_ID`),
+  KEY `FK32210EEB15D1A13D` (`CATEGORY_ID`),
+  KEY `FK32210EEBB96B1C93` (`SEARCH_FACET_ID`),
+  CONSTRAINT `FK32210EEB15D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK32210EEBB96B1C93` FOREIGN KEY (`SEARCH_FACET_ID`) REFERENCES `blc_search_facet` (`SEARCH_FACET_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_cat_site_map_gen_cfg
+CREATE TABLE IF NOT EXISTS `blc_cat_site_map_gen_cfg` (
+  `ENDING_DEPTH` int(11) NOT NULL,
+  `STARTING_DEPTH` int(11) NOT NULL,
+  `GEN_CONFIG_ID` bigint(20) NOT NULL,
+  `ROOT_CATEGORY_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`GEN_CONFIG_ID`),
+  KEY `FK1BA4E695C5F3D60` (`ROOT_CATEGORY_ID`),
+  KEY `FK1BA4E69BCAB9F56` (`GEN_CONFIG_ID`),
+  CONSTRAINT `FK1BA4E695C5F3D60` FOREIGN KEY (`ROOT_CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK1BA4E69BCAB9F56` FOREIGN KEY (`GEN_CONFIG_ID`) REFERENCES `blc_site_map_gen_cfg` (`GEN_CONFIG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_challenge_question
+CREATE TABLE IF NOT EXISTS `blc_challenge_question` (
+  `QUESTION_ID` bigint(20) NOT NULL,
+  `QUESTION` varchar(255) NOT NULL,
+  PRIMARY KEY (`QUESTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_code_types
+CREATE TABLE IF NOT EXISTS `blc_code_types` (
+  `CODE_ID` bigint(20) NOT NULL,
+  `CODE_TYPE` varchar(255) NOT NULL,
+  `CODE_DESC` varchar(255) DEFAULT NULL,
+  `CODE_KEY` varchar(255) NOT NULL,
+  `MODIFIABLE` char(1) DEFAULT NULL,
+  PRIMARY KEY (`CODE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_country
+CREATE TABLE IF NOT EXISTS `blc_country` (
+  `ABBREVIATION` varchar(255) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`ABBREVIATION`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_currency
+CREATE TABLE IF NOT EXISTS `blc_currency` (
+  `CURRENCY_CODE` varchar(255) NOT NULL,
+  `DEFAULT_FLAG` tinyint(1) DEFAULT NULL,
+  `FRIENDLY_NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CURRENCY_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer
+CREATE TABLE IF NOT EXISTS `blc_customer` (
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `CHALLENGE_ANSWER` varchar(255) DEFAULT NULL,
+  `DEACTIVATED` tinyint(1) DEFAULT NULL,
+  `EMAIL_ADDRESS` varchar(255) DEFAULT NULL,
+  `FIRST_NAME` varchar(255) DEFAULT NULL,
+  `LAST_NAME` varchar(255) DEFAULT NULL,
+  `PASSWORD` varchar(255) DEFAULT NULL,
+  `PASSWORD_CHANGE_REQUIRED` tinyint(1) DEFAULT NULL,
+  `IS_PREVIEW` tinyint(1) DEFAULT NULL,
+  `RECEIVE_EMAIL` tinyint(1) DEFAULT NULL,
+  `IS_REGISTERED` tinyint(1) DEFAULT NULL,
+  `TAX_EXEMPTION_CODE` varchar(255) DEFAULT NULL,
+  `USER_NAME` varchar(255) DEFAULT NULL,
+  `CHALLENGE_QUESTION_ID` bigint(20) DEFAULT NULL,
+  `LOCALE_CODE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`CUSTOMER_ID`),
+  KEY `CUSTOMER_CHALLENGE_INDEX` (`CHALLENGE_QUESTION_ID`),
+  KEY `CUSTOMER_EMAIL_INDEX` (`EMAIL_ADDRESS`),
+  KEY `FK7716F0241422B204` (`CHALLENGE_QUESTION_ID`),
+  KEY `FK7716F024A1E1C128` (`LOCALE_CODE`),
+  CONSTRAINT `FK7716F0241422B204` FOREIGN KEY (`CHALLENGE_QUESTION_ID`) REFERENCES `blc_challenge_question` (`QUESTION_ID`),
+  CONSTRAINT `FK7716F024A1E1C128` FOREIGN KEY (`LOCALE_CODE`) REFERENCES `blc_locale` (`LOCALE_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_address
+CREATE TABLE IF NOT EXISTS `blc_customer_address` (
+  `CUSTOMER_ADDRESS_ID` bigint(20) NOT NULL,
+  `ADDRESS_NAME` varchar(255) DEFAULT NULL,
+  `ADDRESS_ID` bigint(20) NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_ADDRESS_ID`),
+  UNIQUE KEY `CSTMR_ADDR_UNIQUE_CNSTRNT` (`CUSTOMER_ID`,`ADDRESS_NAME`),
+  KEY `CUSTOMERADDRESS_ADDRESS_INDEX` (`ADDRESS_ID`),
+  KEY `FK75B95AB9C13085DD` (`ADDRESS_ID`),
+  KEY `FK75B95AB97470F437` (`CUSTOMER_ID`),
+  CONSTRAINT `FK75B95AB97470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK75B95AB9C13085DD` FOREIGN KEY (`ADDRESS_ID`) REFERENCES `blc_address` (`ADDRESS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_attribute
+CREATE TABLE IF NOT EXISTS `blc_customer_attribute` (
+  `CUSTOMER_ATTR_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `VALUE` varchar(255) DEFAULT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_ATTR_ID`),
+  KEY `FKB974C8217470F437` (`CUSTOMER_ID`),
+  CONSTRAINT `FKB974C8217470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_offer_xref
+CREATE TABLE IF NOT EXISTS `blc_customer_offer_xref` (
+  `CUSTOMER_OFFER_ID` bigint(20) NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_OFFER_ID`),
+  KEY `CUSTOFFER_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `CUSTOFFER_OFFER_INDEX` (`OFFER_ID`),
+  KEY `FK685E80397470F437` (`CUSTOMER_ID`),
+  KEY `FK685E8039D5F3FAF4` (`OFFER_ID`),
+  CONSTRAINT `FK685E80397470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK685E8039D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_password_token
+CREATE TABLE IF NOT EXISTS `blc_customer_password_token` (
+  `PASSWORD_TOKEN` varchar(255) NOT NULL,
+  `CREATE_DATE` datetime NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `TOKEN_USED_DATE` datetime DEFAULT NULL,
+  `TOKEN_USED_FLAG` tinyint(1) NOT NULL,
+  PRIMARY KEY (`PASSWORD_TOKEN`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_payment
+CREATE TABLE IF NOT EXISTS `blc_customer_payment` (
+  `CUSTOMER_PAYMENT_ID` bigint(20) NOT NULL,
+  `IS_DEFAULT` tinyint(1) DEFAULT NULL,
+  `PAYMENT_TOKEN` varchar(255) DEFAULT NULL,
+  `ADDRESS_ID` bigint(20) NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_PAYMENT_ID`),
+  UNIQUE KEY `CSTMR_PAY_UNIQUE_CNSTRNT` (`CUSTOMER_ID`,`PAYMENT_TOKEN`),
+  KEY `FK8B3DF0CBC13085DD` (`ADDRESS_ID`),
+  KEY `FK8B3DF0CB7470F437` (`CUSTOMER_ID`),
+  CONSTRAINT `FK8B3DF0CB7470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK8B3DF0CBC13085DD` FOREIGN KEY (`ADDRESS_ID`) REFERENCES `blc_address` (`ADDRESS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_payment_fields
+CREATE TABLE IF NOT EXISTS `blc_customer_payment_fields` (
+  `CUSTOMER_PAYMENT_ID` bigint(20) NOT NULL,
+  `FIELD_VALUE` varchar(255) DEFAULT NULL,
+  `FIELD_NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_PAYMENT_ID`,`FIELD_NAME`),
+  KEY `FK5CCB14ADCA0B98E0` (`CUSTOMER_PAYMENT_ID`),
+  CONSTRAINT `FK5CCB14ADCA0B98E0` FOREIGN KEY (`CUSTOMER_PAYMENT_ID`) REFERENCES `blc_customer_payment` (`CUSTOMER_PAYMENT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_phone
+CREATE TABLE IF NOT EXISTS `blc_customer_phone` (
+  `CUSTOMER_PHONE_ID` bigint(20) NOT NULL,
+  `PHONE_NAME` varchar(255) DEFAULT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `PHONE_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_PHONE_ID`),
+  UNIQUE KEY `CSTMR_PHONE_UNIQUE_CNSTRNT` (`CUSTOMER_ID`,`PHONE_NAME`),
+  KEY `CUSTPHONE_PHONE_INDEX` (`PHONE_ID`),
+  KEY `FK3D28ED737470F437` (`CUSTOMER_ID`),
+  KEY `FK3D28ED73D894CB5D` (`PHONE_ID`),
+  CONSTRAINT `FK3D28ED737470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK3D28ED73D894CB5D` FOREIGN KEY (`PHONE_ID`) REFERENCES `blc_phone` (`PHONE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_customer_role
+CREATE TABLE IF NOT EXISTS `blc_customer_role` (
+  `CUSTOMER_ROLE_ID` bigint(20) NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `ROLE_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CUSTOMER_ROLE_ID`),
+  KEY `CUSTROLE_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `CUSTROLE_ROLE_INDEX` (`ROLE_ID`),
+  KEY `FK548EB7B17470F437` (`CUSTOMER_ID`),
+  KEY `FK548EB7B1B8587B7` (`ROLE_ID`),
+  CONSTRAINT `FK548EB7B17470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK548EB7B1B8587B7` FOREIGN KEY (`ROLE_ID`) REFERENCES `blc_role` (`ROLE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_cust_site_map_gen_cfg
+CREATE TABLE IF NOT EXISTS `blc_cust_site_map_gen_cfg` (
+  `GEN_CONFIG_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`GEN_CONFIG_ID`),
+  KEY `FK67C0DBA0BCAB9F56` (`GEN_CONFIG_ID`),
+  CONSTRAINT `FK67C0DBA0BCAB9F56` FOREIGN KEY (`GEN_CONFIG_ID`) REFERENCES `blc_site_map_gen_cfg` (`GEN_CONFIG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_data_drvn_enum
+CREATE TABLE IF NOT EXISTS `blc_data_drvn_enum` (
+  `ENUM_ID` bigint(20) NOT NULL,
+  `ENUM_KEY` varchar(255) DEFAULT NULL,
+  `MODIFIABLE` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`ENUM_ID`),
+  KEY `ENUM_KEY_INDEX` (`ENUM_KEY`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_data_drvn_enum_val
+CREATE TABLE IF NOT EXISTS `blc_data_drvn_enum_val` (
+  `ENUM_VAL_ID` bigint(20) NOT NULL,
+  `DISPLAY` varchar(255) DEFAULT NULL,
+  `HIDDEN` tinyint(1) DEFAULT NULL,
+  `ENUM_KEY` varchar(255) DEFAULT NULL,
+  `ENUM_TYPE` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ENUM_VAL_ID`),
+  KEY `HIDDEN_INDEX` (`HIDDEN`),
+  KEY `ENUM_VAL_KEY_INDEX` (`ENUM_KEY`),
+  KEY `FKB2D5700DA60E0554` (`ENUM_TYPE`),
+  CONSTRAINT `FKB2D5700DA60E0554` FOREIGN KEY (`ENUM_TYPE`) REFERENCES `blc_data_drvn_enum` (`ENUM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_discrete_order_item
+CREATE TABLE IF NOT EXISTS `blc_discrete_order_item` (
+  `BASE_RETAIL_PRICE` decimal(19,5) DEFAULT NULL,
+  `BASE_SALE_PRICE` decimal(19,5) DEFAULT NULL,
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  `BUNDLE_ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  `PRODUCT_ID` bigint(20) DEFAULT NULL,
+  `SKU_ID` bigint(20) NOT NULL,
+  `SKU_BUNDLE_ITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ID`),
+  KEY `DISCRETE_PRODUCT_INDEX` (`PRODUCT_ID`),
+  KEY `DISCRETE_SKU_INDEX` (`SKU_ID`),
+  KEY `FKBC3A8A845CDFCA80` (`BUNDLE_ORDER_ITEM_ID`),
+  KEY `FKBC3A8A845F11A0B7` (`PRODUCT_ID`),
+  KEY `FKBC3A8A84B78C9977` (`SKU_ID`),
+  KEY `FKBC3A8A841285903B` (`SKU_BUNDLE_ITEM_ID`),
+  KEY `FKBC3A8A849AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKBC3A8A841285903B` FOREIGN KEY (`SKU_BUNDLE_ITEM_ID`) REFERENCES `blc_sku_bundle_item` (`SKU_BUNDLE_ITEM_ID`),
+  CONSTRAINT `FKBC3A8A845CDFCA80` FOREIGN KEY (`BUNDLE_ORDER_ITEM_ID`) REFERENCES `blc_bundle_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKBC3A8A845F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`),
+  CONSTRAINT `FKBC3A8A849AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKBC3A8A84B78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_disc_item_fee_price
+CREATE TABLE IF NOT EXISTS `blc_disc_item_fee_price` (
+  `DISC_ITEM_FEE_PRICE_ID` bigint(20) NOT NULL,
+  `AMOUNT` decimal(19,5) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `REPORTING_CODE` varchar(255) DEFAULT NULL,
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`DISC_ITEM_FEE_PRICE_ID`),
+  KEY `FK2A641CC8B76B9466` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK2A641CC8B76B9466` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_discrete_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_dyn_discrete_order_item
+CREATE TABLE IF NOT EXISTS `blc_dyn_discrete_order_item` (
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ID`),
+  KEY `FK209DEE9EB76B9466` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK209DEE9EB76B9466` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_discrete_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_email_tracking
+CREATE TABLE IF NOT EXISTS `blc_email_tracking` (
+  `EMAIL_TRACKING_ID` bigint(20) NOT NULL,
+  `DATE_SENT` datetime DEFAULT NULL,
+  `EMAIL_ADDRESS` varchar(255) DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`EMAIL_TRACKING_ID`),
+  KEY `EMAILTRACKING_INDEX` (`EMAIL_ADDRESS`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_email_tracking_clicks
+CREATE TABLE IF NOT EXISTS `blc_email_tracking_clicks` (
+  `CLICK_ID` bigint(20) NOT NULL,
+  `CUSTOMER_ID` varchar(255) DEFAULT NULL,
+  `DATE_CLICKED` datetime NOT NULL,
+  `DESTINATION_URI` varchar(255) DEFAULT NULL,
+  `QUERY_STRING` varchar(255) DEFAULT NULL,
+  `EMAIL_TRACKING_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CLICK_ID`),
+  KEY `TRACKINGCLICKS_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `TRACKINGCLICKS_TRACKING_INDEX` (`EMAIL_TRACKING_ID`),
+  KEY `FKFDF9F52AFA1E5D61` (`EMAIL_TRACKING_ID`),
+  CONSTRAINT `FKFDF9F52AFA1E5D61` FOREIGN KEY (`EMAIL_TRACKING_ID`) REFERENCES `blc_email_tracking` (`EMAIL_TRACKING_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_email_tracking_opens
+CREATE TABLE IF NOT EXISTS `blc_email_tracking_opens` (
+  `OPEN_ID` bigint(20) NOT NULL,
+  `DATE_OPENED` datetime DEFAULT NULL,
+  `USER_AGENT` varchar(255) DEFAULT NULL,
+  `EMAIL_TRACKING_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`OPEN_ID`),
+  KEY `TRACKINGOPEN_TRACKING` (`EMAIL_TRACKING_ID`),
+  KEY `FKA5C3722AFA1E5D61` (`EMAIL_TRACKING_ID`),
+  CONSTRAINT `FKA5C3722AFA1E5D61` FOREIGN KEY (`EMAIL_TRACKING_ID`) REFERENCES `blc_email_tracking` (`EMAIL_TRACKING_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fg_adjustment
+CREATE TABLE IF NOT EXISTS `blc_fg_adjustment` (
+  `FG_ADJUSTMENT_ID` bigint(20) NOT NULL,
+  `ADJUSTMENT_REASON` varchar(255) NOT NULL,
+  `ADJUSTMENT_VALUE` decimal(19,5) NOT NULL,
+  `FULFILLMENT_GROUP_ID` bigint(20) DEFAULT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`FG_ADJUSTMENT_ID`),
+  KEY `FGADJUSTMENT_INDEX` (`FULFILLMENT_GROUP_ID`),
+  KEY `FGADJUSTMENT_OFFER_INDEX` (`OFFER_ID`),
+  KEY `FK468C8F255028DC55` (`FULFILLMENT_GROUP_ID`),
+  KEY `FK468C8F25D5F3FAF4` (`OFFER_ID`),
+  CONSTRAINT `FK468C8F255028DC55` FOREIGN KEY (`FULFILLMENT_GROUP_ID`) REFERENCES `blc_fulfillment_group` (`FULFILLMENT_GROUP_ID`),
+  CONSTRAINT `FK468C8F25D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fg_fee_tax_xref
+CREATE TABLE IF NOT EXISTS `blc_fg_fee_tax_xref` (
+  `FULFILLMENT_GROUP_FEE_ID` bigint(20) NOT NULL,
+  `TAX_DETAIL_ID` bigint(20) NOT NULL,
+  UNIQUE KEY `UK_25426DC0FA888C35` (`TAX_DETAIL_ID`),
+  KEY `FK25426DC071448C19` (`TAX_DETAIL_ID`),
+  KEY `FK25426DC0598F6D02` (`FULFILLMENT_GROUP_FEE_ID`),
+  CONSTRAINT `FK25426DC0598F6D02` FOREIGN KEY (`FULFILLMENT_GROUP_FEE_ID`) REFERENCES `blc_fulfillment_group_fee` (`FULFILLMENT_GROUP_FEE_ID`),
+  CONSTRAINT `FK25426DC071448C19` FOREIGN KEY (`TAX_DETAIL_ID`) REFERENCES `blc_tax_detail` (`TAX_DETAIL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fg_fg_tax_xref
+CREATE TABLE IF NOT EXISTS `blc_fg_fg_tax_xref` (
+  `FULFILLMENT_GROUP_ID` bigint(20) NOT NULL,
+  `TAX_DETAIL_ID` bigint(20) NOT NULL,
+  UNIQUE KEY `UK_61BEA455FA888C35` (`TAX_DETAIL_ID`),
+  KEY `FK61BEA45571448C19` (`TAX_DETAIL_ID`),
+  KEY `FK61BEA4555028DC55` (`FULFILLMENT_GROUP_ID`),
+  CONSTRAINT `FK61BEA4555028DC55` FOREIGN KEY (`FULFILLMENT_GROUP_ID`) REFERENCES `blc_fulfillment_group` (`FULFILLMENT_GROUP_ID`),
+  CONSTRAINT `FK61BEA45571448C19` FOREIGN KEY (`TAX_DETAIL_ID`) REFERENCES `blc_tax_detail` (`TAX_DETAIL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fg_item_tax_xref
+CREATE TABLE IF NOT EXISTS `blc_fg_item_tax_xref` (
+  `FULFILLMENT_GROUP_ITEM_ID` bigint(20) NOT NULL,
+  `TAX_DETAIL_ID` bigint(20) NOT NULL,
+  UNIQUE KEY `UK_DD3E8443FA888C35` (`TAX_DETAIL_ID`),
+  KEY `FKDD3E844371448C19` (`TAX_DETAIL_ID`),
+  KEY `FKDD3E8443E3BBB4D2` (`FULFILLMENT_GROUP_ITEM_ID`),
+  CONSTRAINT `FKDD3E844371448C19` FOREIGN KEY (`TAX_DETAIL_ID`) REFERENCES `blc_tax_detail` (`TAX_DETAIL_ID`),
+  CONSTRAINT `FKDD3E8443E3BBB4D2` FOREIGN KEY (`FULFILLMENT_GROUP_ITEM_ID`) REFERENCES `blc_fulfillment_group_item` (`FULFILLMENT_GROUP_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_field
+CREATE TABLE IF NOT EXISTS `blc_field` (
+  `FIELD_ID` bigint(20) NOT NULL,
+  `ABBREVIATION` varchar(255) DEFAULT NULL,
+  `ENTITY_TYPE` varchar(255) NOT NULL,
+  `FACET_FIELD_TYPE` varchar(255) DEFAULT NULL,
+  `PROPERTY_NAME` varchar(255) NOT NULL,
+  `SEARCHABLE` tinyint(1) DEFAULT NULL,
+  `TRANSLATABLE` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`FIELD_ID`),
+  KEY `ENTITY_TYPE_INDEX` (`ENTITY_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_field_search_types
+CREATE TABLE IF NOT EXISTS `blc_field_search_types` (
+  `FIELD_ID` bigint(20) NOT NULL,
+  `SEARCHABLE_FIELD_TYPE` varchar(255) DEFAULT NULL,
+  KEY `FKF52D130D3C3907C4` (`FIELD_ID`),
+  CONSTRAINT `FKF52D130D3C3907C4` FOREIGN KEY (`FIELD_ID`) REFERENCES `blc_field` (`FIELD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fld_def
+CREATE TABLE IF NOT EXISTS `blc_fld_def` (
+  `FLD_DEF_ID` bigint(20) NOT NULL,
+  `ALLOW_MULTIPLES` tinyint(1) DEFAULT NULL,
+  `COLUMN_WIDTH` varchar(255) DEFAULT NULL,
+  `FLD_ORDER` int(11) DEFAULT NULL,
+  `FLD_TYPE` varchar(255) DEFAULT NULL,
+  `FRIENDLY_NAME` varchar(255) DEFAULT NULL,
+  `HIDDEN_FLAG` tinyint(1) DEFAULT NULL,
+  `MAX_LENGTH` int(11) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `REQUIRED_FLAG` tinyint(1) DEFAULT NULL,
+  `SECURITY_LEVEL` varchar(255) DEFAULT NULL,
+  `TEXT_AREA_FLAG` tinyint(1) DEFAULT NULL,
+  `VLDTN_ERROR_MSSG_KEY` varchar(255) DEFAULT NULL,
+  `VLDTN_REGEX` varchar(255) DEFAULT NULL,
+  `ENUM_ID` bigint(20) DEFAULT NULL,
+  `FLD_GROUP_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`FLD_DEF_ID`),
+  KEY `FK3FCB575E38D08AB5` (`ENUM_ID`),
+  KEY `FK3FCB575E6A79BDB5` (`FLD_GROUP_ID`),
+  CONSTRAINT `FK3FCB575E38D08AB5` FOREIGN KEY (`ENUM_ID`) REFERENCES `blc_data_drvn_enum` (`ENUM_ID`),
+  CONSTRAINT `FK3FCB575E6A79BDB5` FOREIGN KEY (`FLD_GROUP_ID`) REFERENCES `blc_fld_group` (`FLD_GROUP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fld_enum
+CREATE TABLE IF NOT EXISTS `blc_fld_enum` (
+  `FLD_ENUM_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`FLD_ENUM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fld_enum_item
+CREATE TABLE IF NOT EXISTS `blc_fld_enum_item` (
+  `FLD_ENUM_ITEM_ID` bigint(20) NOT NULL,
+  `FLD_ORDER` int(11) DEFAULT NULL,
+  `FRIENDLY_NAME` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `FLD_ENUM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`FLD_ENUM_ITEM_ID`),
+  KEY `FK83A6A84AFD2EA299` (`FLD_ENUM_ID`),
+  CONSTRAINT `FK83A6A84AFD2EA299` FOREIGN KEY (`FLD_ENUM_ID`) REFERENCES `blc_fld_enum` (`FLD_ENUM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fld_group
+CREATE TABLE IF NOT EXISTS `blc_fld_group` (
+  `FLD_GROUP_ID` bigint(20) NOT NULL,
+  `INIT_COLLAPSED_FLAG` tinyint(1) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`FLD_GROUP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_group
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_group` (
+  `FULFILLMENT_GROUP_ID` bigint(20) NOT NULL,
+  `DELIVERY_INSTRUCTION` varchar(255) DEFAULT NULL,
+  `PRICE` decimal(19,5) DEFAULT NULL,
+  `SHIPPING_PRICE_TAXABLE` tinyint(1) DEFAULT NULL,
+  `MERCHANDISE_TOTAL` decimal(19,5) DEFAULT NULL,
+  `METHOD` varchar(255) DEFAULT NULL,
+  `IS_PRIMARY` tinyint(1) DEFAULT NULL,
+  `REFERENCE_NUMBER` varchar(255) DEFAULT NULL,
+  `RETAIL_PRICE` decimal(19,5) DEFAULT NULL,
+  `SALE_PRICE` decimal(19,5) DEFAULT NULL,
+  `FULFILLMENT_GROUP_SEQUNCE` int(11) DEFAULT NULL,
+  `SERVICE` varchar(255) DEFAULT NULL,
+  `SHIPPING_OVERRIDE` tinyint(1) DEFAULT NULL,
+  `STATUS` varchar(255) DEFAULT NULL,
+  `TOTAL` decimal(19,5) DEFAULT NULL,
+  `TOTAL_FEE_TAX` decimal(19,5) DEFAULT NULL,
+  `TOTAL_FG_TAX` decimal(19,5) DEFAULT NULL,
+  `TOTAL_ITEM_TAX` decimal(19,5) DEFAULT NULL,
+  `TOTAL_TAX` decimal(19,5) DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  `ADDRESS_ID` bigint(20) DEFAULT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) DEFAULT NULL,
+  `ORDER_ID` bigint(20) NOT NULL,
+  `PERSONAL_MESSAGE_ID` bigint(20) DEFAULT NULL,
+  `PHONE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`FULFILLMENT_GROUP_ID`),
+  KEY `FG_ADDRESS_INDEX` (`ADDRESS_ID`),
+  KEY `FG_METHOD_INDEX` (`METHOD`),
+  KEY `FG_ORDER_INDEX` (`ORDER_ID`),
+  KEY `FG_MESSAGE_INDEX` (`PERSONAL_MESSAGE_ID`),
+  KEY `FG_PHONE_INDEX` (`PHONE_ID`),
+  KEY `FG_PRIMARY_INDEX` (`IS_PRIMARY`),
+  KEY `FG_REFERENCE_INDEX` (`REFERENCE_NUMBER`),
+  KEY `FG_SERVICE_INDEX` (`SERVICE`),
+  KEY `FG_STATUS_INDEX` (`STATUS`),
+  KEY `FKC5B9EF18C13085DD` (`ADDRESS_ID`),
+  KEY `FKC5B9EF1881F34C7F` (`FULFILLMENT_OPTION_ID`),
+  KEY `FKC5B9EF1889FE8A02` (`ORDER_ID`),
+  KEY `FKC5B9EF1877F565E1` (`PERSONAL_MESSAGE_ID`),
+  KEY `FKC5B9EF18D894CB5D` (`PHONE_ID`),
+  CONSTRAINT `FKC5B9EF1877F565E1` FOREIGN KEY (`PERSONAL_MESSAGE_ID`) REFERENCES `blc_personal_message` (`PERSONAL_MESSAGE_ID`),
+  CONSTRAINT `FKC5B9EF1881F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FKC5B9EF1889FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FKC5B9EF18C13085DD` FOREIGN KEY (`ADDRESS_ID`) REFERENCES `blc_address` (`ADDRESS_ID`),
+  CONSTRAINT `FKC5B9EF18D894CB5D` FOREIGN KEY (`PHONE_ID`) REFERENCES `blc_phone` (`PHONE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_group_fee
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_group_fee` (
+  `FULFILLMENT_GROUP_FEE_ID` bigint(20) NOT NULL,
+  `AMOUNT` decimal(19,5) DEFAULT NULL,
+  `FEE_TAXABLE_FLAG` tinyint(1) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `REPORTING_CODE` varchar(255) DEFAULT NULL,
+  `TOTAL_FEE_TAX` decimal(19,5) DEFAULT NULL,
+  `FULFILLMENT_GROUP_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`FULFILLMENT_GROUP_FEE_ID`),
+  KEY `FK6AA8E1BF5028DC55` (`FULFILLMENT_GROUP_ID`),
+  CONSTRAINT `FK6AA8E1BF5028DC55` FOREIGN KEY (`FULFILLMENT_GROUP_ID`) REFERENCES `blc_fulfillment_group` (`FULFILLMENT_GROUP_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_group_item
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_group_item` (
+  `FULFILLMENT_GROUP_ITEM_ID` bigint(20) NOT NULL,
+  `PRORATED_ORDER_ADJ` decimal(19,2) DEFAULT NULL,
+  `QUANTITY` int(11) NOT NULL,
+  `STATUS` varchar(255) DEFAULT NULL,
+  `TOTAL_ITEM_AMOUNT` decimal(19,5) DEFAULT NULL,
+  `TOTAL_ITEM_TAXABLE_AMOUNT` decimal(19,5) DEFAULT NULL,
+  `TOTAL_ITEM_TAX` decimal(19,5) DEFAULT NULL,
+  `FULFILLMENT_GROUP_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`FULFILLMENT_GROUP_ITEM_ID`),
+  KEY `FGITEM_FG_INDEX` (`FULFILLMENT_GROUP_ID`),
+  KEY `FGITEM_STATUS_INDEX` (`STATUS`),
+  KEY `FKEA74EBDA5028DC55` (`FULFILLMENT_GROUP_ID`),
+  KEY `FKEA74EBDA9AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKEA74EBDA5028DC55` FOREIGN KEY (`FULFILLMENT_GROUP_ID`) REFERENCES `blc_fulfillment_group` (`FULFILLMENT_GROUP_ID`),
+  CONSTRAINT `FKEA74EBDA9AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_option
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_option` (
+  `FULFILLMENT_OPTION_ID` bigint(20) NOT NULL,
+  `FULFILLMENT_TYPE` varchar(255) NOT NULL,
+  `LONG_DESCRIPTION` longtext,
+  `NAME` varchar(255) DEFAULT NULL,
+  `TAX_CODE` varchar(255) DEFAULT NULL,
+  `TAXABLE` tinyint(1) DEFAULT NULL,
+  `USE_FLAT_RATES` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`FULFILLMENT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_option_fixed
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_option_fixed` (
+  `PRICE` decimal(19,5) NOT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) NOT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`FULFILLMENT_OPTION_ID`),
+  KEY `FK408360313E2FC4F9` (`CURRENCY_CODE`),
+  KEY `FK4083603181F34C7F` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FK408360313E2FC4F9` FOREIGN KEY (`CURRENCY_CODE`) REFERENCES `blc_currency` (`CURRENCY_CODE`),
+  CONSTRAINT `FK4083603181F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_opt_banded_prc
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_opt_banded_prc` (
+  `FULFILLMENT_OPTION_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`FULFILLMENT_OPTION_ID`),
+  KEY `FKB1FD71E981F34C7F` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FKB1FD71E981F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_opt_banded_wgt
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_opt_banded_wgt` (
+  `FULFILLMENT_OPTION_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`FULFILLMENT_OPTION_ID`),
+  KEY `FKB1FD8AEC81F34C7F` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FKB1FD8AEC81F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_price_band
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_price_band` (
+  `FULFILLMENT_PRICE_BAND_ID` bigint(20) NOT NULL,
+  `RESULT_AMOUNT` decimal(19,5) NOT NULL,
+  `RESULT_AMOUNT_TYPE` varchar(255) NOT NULL,
+  `RETAIL_PRICE_MINIMUM_AMOUNT` decimal(19,5) NOT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`FULFILLMENT_PRICE_BAND_ID`),
+  KEY `FK46C9EA726CDF59CA` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FK46C9EA726CDF59CA` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_opt_banded_prc` (`FULFILLMENT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_fulfillment_weight_band
+CREATE TABLE IF NOT EXISTS `blc_fulfillment_weight_band` (
+  `FULFILLMENT_WEIGHT_BAND_ID` bigint(20) NOT NULL,
+  `RESULT_AMOUNT` decimal(19,5) NOT NULL,
+  `RESULT_AMOUNT_TYPE` varchar(255) NOT NULL,
+  `MINIMUM_WEIGHT` decimal(19,5) DEFAULT NULL,
+  `WEIGHT_UNIT_OF_MEASURE` varchar(255) DEFAULT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`FULFILLMENT_WEIGHT_BAND_ID`),
+  KEY `FK6A048D95A0B429C3` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FK6A048D95A0B429C3` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_opt_banded_wgt` (`FULFILLMENT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_giftwrap_order_item
+CREATE TABLE IF NOT EXISTS `blc_giftwrap_order_item` (
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ID`),
+  KEY `FKE1BE1563B76B9466` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKE1BE1563B76B9466` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_discrete_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_id_generation
+CREATE TABLE IF NOT EXISTS `blc_id_generation` (
+  `ID_TYPE` varchar(255) NOT NULL,
+  `BATCH_SIZE` bigint(20) NOT NULL,
+  `BATCH_START` bigint(20) NOT NULL,
+  `ID_MIN` bigint(20) DEFAULT NULL,
+  `ID_MAX` bigint(20) DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_img_static_asset
+CREATE TABLE IF NOT EXISTS `blc_img_static_asset` (
+  `HEIGHT` int(11) DEFAULT NULL,
+  `WIDTH` int(11) DEFAULT NULL,
+  `STATIC_ASSET_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`STATIC_ASSET_ID`),
+  KEY `FKCC4B772167F70B63` (`STATIC_ASSET_ID`),
+  CONSTRAINT `FKCC4B772167F70B63` FOREIGN KEY (`STATIC_ASSET_ID`) REFERENCES `blc_static_asset` (`STATIC_ASSET_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_item_offer_qualifier
+CREATE TABLE IF NOT EXISTS `blc_item_offer_qualifier` (
+  `ITEM_OFFER_QUALIFIER_ID` bigint(20) NOT NULL,
+  `QUANTITY` bigint(20) DEFAULT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ITEM_OFFER_QUALIFIER_ID`),
+  KEY `FKD9C50C61D5F3FAF4` (`OFFER_ID`),
+  KEY `FKD9C50C619AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKD9C50C619AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKD9C50C61D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_locale
+CREATE TABLE IF NOT EXISTS `blc_locale` (
+  `LOCALE_CODE` varchar(255) NOT NULL,
+  `DEFAULT_FLAG` tinyint(1) DEFAULT NULL,
+  `FRIENDLY_NAME` varchar(255) DEFAULT NULL,
+  `USE_IN_SEARCH_INDEX` tinyint(1) DEFAULT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`LOCALE_CODE`),
+  KEY `FK56C7DC203E2FC4F9` (`CURRENCY_CODE`),
+  CONSTRAINT `FK56C7DC203E2FC4F9` FOREIGN KEY (`CURRENCY_CODE`) REFERENCES `blc_currency` (`CURRENCY_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_media
+CREATE TABLE IF NOT EXISTS `blc_media` (
+  `MEDIA_ID` bigint(20) NOT NULL,
+  `ALT_TEXT` varchar(255) DEFAULT NULL,
+  `TAGS` varchar(255) DEFAULT NULL,
+  `TITLE` varchar(255) DEFAULT NULL,
+  `URL` varchar(255) NOT NULL,
+  PRIMARY KEY (`MEDIA_ID`),
+  KEY `MEDIA_TITLE_INDEX` (`TITLE`),
+  KEY `MEDIA_URL_INDEX` (`URL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_module_configuration
+CREATE TABLE IF NOT EXISTS `blc_module_configuration` (
+  `MODULE_CONFIG_ID` bigint(20) NOT NULL,
+  `ACTIVE_END_DATE` datetime DEFAULT NULL,
+  `ACTIVE_START_DATE` datetime DEFAULT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `CONFIG_TYPE` varchar(255) NOT NULL,
+  `IS_DEFAULT` tinyint(1) NOT NULL,
+  `MODULE_NAME` varchar(255) NOT NULL,
+  `MODULE_PRIORITY` int(11) NOT NULL,
+  PRIMARY KEY (`MODULE_CONFIG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer
+CREATE TABLE IF NOT EXISTS `blc_offer` (
+  `OFFER_ID` bigint(20) NOT NULL,
+  `APPLIES_WHEN_RULES` longtext,
+  `APPLIES_TO_RULES` longtext,
+  `APPLY_OFFER_TO_MARKED_ITEMS` tinyint(1) DEFAULT NULL,
+  `APPLY_TO_SALE_PRICE` tinyint(1) DEFAULT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `AUTOMATICALLY_ADDED` tinyint(1) DEFAULT NULL,
+  `COMBINABLE_WITH_OTHER_OFFERS` tinyint(1) DEFAULT NULL,
+  `OFFER_DELIVERY_TYPE` varchar(255) DEFAULT NULL,
+  `OFFER_DESCRIPTION` varchar(255) DEFAULT NULL,
+  `OFFER_DISCOUNT_TYPE` varchar(255) DEFAULT NULL,
+  `END_DATE` datetime DEFAULT NULL,
+  `MARKETING_MESSASGE` varchar(255) DEFAULT NULL,
+  `MAX_USES_PER_CUSTOMER` bigint(20) DEFAULT NULL,
+  `MAX_USES` int(11) DEFAULT NULL,
+  `OFFER_NAME` varchar(255) NOT NULL,
+  `OFFER_ITEM_QUALIFIER_RULE` varchar(255) DEFAULT NULL,
+  `OFFER_ITEM_TARGET_RULE` varchar(255) DEFAULT NULL,
+  `OFFER_PRIORITY` int(11) DEFAULT NULL,
+  `QUALIFYING_ITEM_MIN_TOTAL` decimal(19,5) DEFAULT NULL,
+  `REQUIRES_RELATED_TAR_QUAL` tinyint(1) DEFAULT NULL,
+  `STACKABLE` tinyint(1) DEFAULT NULL,
+  `START_DATE` datetime DEFAULT NULL,
+  `TARGET_SYSTEM` varchar(255) DEFAULT NULL,
+  `TOTALITARIAN_OFFER` tinyint(1) DEFAULT NULL,
+  `USE_NEW_FORMAT` tinyint(1) DEFAULT NULL,
+  `OFFER_TYPE` varchar(255) NOT NULL,
+  `USES` int(11) DEFAULT NULL,
+  `OFFER_VALUE` decimal(19,5) NOT NULL,
+  PRIMARY KEY (`OFFER_ID`),
+  KEY `OFFER_DISCOUNT_INDEX` (`OFFER_DISCOUNT_TYPE`),
+  KEY `OFFER_MARKETING_MESSAGE_INDEX` (`MARKETING_MESSASGE`),
+  KEY `OFFER_NAME_INDEX` (`OFFER_NAME`),
+  KEY `OFFER_TYPE_INDEX` (`OFFER_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_audit
+CREATE TABLE IF NOT EXISTS `blc_offer_audit` (
+  `OFFER_AUDIT_ID` bigint(20) NOT NULL,
+  `CUSTOMER_ID` bigint(20) DEFAULT NULL,
+  `OFFER_CODE_ID` bigint(20) DEFAULT NULL,
+  `OFFER_ID` bigint(20) DEFAULT NULL,
+  `ORDER_ID` bigint(20) DEFAULT NULL,
+  `REDEEMED_DATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OFFER_AUDIT_ID`),
+  KEY `OFFERAUDIT_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `OFFERAUDIT_OFFER_CODE_INDEX` (`OFFER_CODE_ID`),
+  KEY `OFFERAUDIT_OFFER_INDEX` (`OFFER_ID`),
+  KEY `OFFERAUDIT_ORDER_INDEX` (`ORDER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_code
+CREATE TABLE IF NOT EXISTS `blc_offer_code` (
+  `OFFER_CODE_ID` bigint(20) NOT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `MAX_USES` int(11) DEFAULT NULL,
+  `OFFER_CODE` varchar(255) NOT NULL,
+  `END_DATE` datetime DEFAULT NULL,
+  `START_DATE` datetime DEFAULT NULL,
+  `USES` int(11) DEFAULT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`OFFER_CODE_ID`),
+  KEY `OFFERCODE_OFFER_INDEX` (`OFFER_ID`),
+  KEY `OFFERCODE_CODE_INDEX` (`OFFER_CODE`),
+  KEY `FK76B8C8D6D5F3FAF4` (`OFFER_ID`),
+  CONSTRAINT `FK76B8C8D6D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_info
+CREATE TABLE IF NOT EXISTS `blc_offer_info` (
+  `OFFER_INFO_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`OFFER_INFO_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_info_fields
+CREATE TABLE IF NOT EXISTS `blc_offer_info_fields` (
+  `OFFER_INFO_FIELDS_ID` bigint(20) NOT NULL,
+  `FIELD_VALUE` varchar(255) DEFAULT NULL,
+  `FIELD_NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`OFFER_INFO_FIELDS_ID`,`FIELD_NAME`),
+  KEY `FKA901886183AE7237` (`OFFER_INFO_FIELDS_ID`),
+  CONSTRAINT `FKA901886183AE7237` FOREIGN KEY (`OFFER_INFO_FIELDS_ID`) REFERENCES `blc_offer_info` (`OFFER_INFO_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_item_criteria
+CREATE TABLE IF NOT EXISTS `blc_offer_item_criteria` (
+  `OFFER_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_MATCH_RULE` longtext,
+  `QUANTITY` int(11) NOT NULL,
+  PRIMARY KEY (`OFFER_ITEM_CRITERIA_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_rule
+CREATE TABLE IF NOT EXISTS `blc_offer_rule` (
+  `OFFER_RULE_ID` bigint(20) NOT NULL,
+  `MATCH_RULE` longtext,
+  PRIMARY KEY (`OFFER_RULE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_offer_rule_map
+CREATE TABLE IF NOT EXISTS `blc_offer_rule_map` (
+  `BLC_OFFER_OFFER_ID` bigint(20) NOT NULL,
+  `OFFER_RULE_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`BLC_OFFER_OFFER_ID`,`MAP_KEY`),
+  KEY `FKCA468FE2C11A218D` (`OFFER_RULE_ID`),
+  KEY `FKCA468FE245C66D1D` (`BLC_OFFER_OFFER_ID`),
+  CONSTRAINT `FKCA468FE245C66D1D` FOREIGN KEY (`BLC_OFFER_OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`),
+  CONSTRAINT `FKCA468FE2C11A218D` FOREIGN KEY (`OFFER_RULE_ID`) REFERENCES `blc_offer_rule` (`OFFER_RULE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order
+CREATE TABLE IF NOT EXISTS `blc_order` (
+  `ORDER_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `EMAIL_ADDRESS` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `ORDER_NUMBER` varchar(255) DEFAULT NULL,
+  `IS_PREVIEW` tinyint(1) DEFAULT NULL,
+  `ORDER_STATUS` varchar(255) DEFAULT NULL,
+  `ORDER_SUBTOTAL` decimal(19,5) DEFAULT NULL,
+  `SUBMIT_DATE` datetime DEFAULT NULL,
+  `TAX_OVERRIDE` tinyint(1) DEFAULT NULL,
+  `ORDER_TOTAL` decimal(19,5) DEFAULT NULL,
+  `TOTAL_SHIPPING` decimal(19,5) DEFAULT NULL,
+  `TOTAL_TAX` decimal(19,5) DEFAULT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `LOCALE_CODE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ID`),
+  KEY `ORDER_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `ORDER_EMAIL_INDEX` (`EMAIL_ADDRESS`),
+  KEY `ORDER_NAME_INDEX` (`NAME`),
+  KEY `ORDER_NUMBER_INDEX` (`ORDER_NUMBER`),
+  KEY `ORDER_STATUS_INDEX` (`ORDER_STATUS`),
+  KEY `FK8F5B64A83E2FC4F9` (`CURRENCY_CODE`),
+  KEY `FK8F5B64A87470F437` (`CUSTOMER_ID`),
+  KEY `FK8F5B64A8A1E1C128` (`LOCALE_CODE`),
+  CONSTRAINT `FK8F5B64A83E2FC4F9` FOREIGN KEY (`CURRENCY_CODE`) REFERENCES `blc_currency` (`CURRENCY_CODE`),
+  CONSTRAINT `FK8F5B64A87470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK8F5B64A8A1E1C128` FOREIGN KEY (`LOCALE_CODE`) REFERENCES `blc_locale` (`LOCALE_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_adjustment
+CREATE TABLE IF NOT EXISTS `blc_order_adjustment` (
+  `ORDER_ADJUSTMENT_ID` bigint(20) NOT NULL,
+  `ADJUSTMENT_REASON` varchar(255) NOT NULL,
+  `ADJUSTMENT_VALUE` decimal(19,5) NOT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  `ORDER_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ADJUSTMENT_ID`),
+  KEY `ORDERADJUST_OFFER_INDEX` (`OFFER_ID`),
+  KEY `ORDERADJUST_ORDER_INDEX` (`ORDER_ID`),
+  KEY `FK1E92D164D5F3FAF4` (`OFFER_ID`),
+  KEY `FK1E92D16489FE8A02` (`ORDER_ID`),
+  CONSTRAINT `FK1E92D16489FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FK1E92D164D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_attribute
+CREATE TABLE IF NOT EXISTS `blc_order_attribute` (
+  `ORDER_ATTRIBUTE_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `VALUE` varchar(255) DEFAULT NULL,
+  `ORDER_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ORDER_ATTRIBUTE_ID`),
+  KEY `FKB3A467A589FE8A02` (`ORDER_ID`),
+  CONSTRAINT `FKB3A467A589FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_item
+CREATE TABLE IF NOT EXISTS `blc_order_item` (
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  `DISCOUNTS_ALLOWED` tinyint(1) DEFAULT NULL,
+  `ITEM_TAXABLE_FLAG` tinyint(1) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `ORDER_ITEM_TYPE` varchar(255) DEFAULT NULL,
+  `PRICE` decimal(19,5) DEFAULT NULL,
+  `QUANTITY` int(11) NOT NULL,
+  `RETAIL_PRICE` decimal(19,5) DEFAULT NULL,
+  `RETAIL_PRICE_OVERRIDE` tinyint(1) DEFAULT NULL,
+  `SALE_PRICE` decimal(19,5) DEFAULT NULL,
+  `SALE_PRICE_OVERRIDE` tinyint(1) DEFAULT NULL,
+  `TOTAL_TAX` decimal(19,2) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `GIFT_WRAP_ITEM_ID` bigint(20) DEFAULT NULL,
+  `ORDER_ID` bigint(20) DEFAULT NULL,
+  `PARENT_ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  `PERSONAL_MESSAGE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ID`),
+  KEY `ORDERITEM_CATEGORY_INDEX` (`CATEGORY_ID`),
+  KEY `ORDERITEM_GIFT_INDEX` (`GIFT_WRAP_ITEM_ID`),
+  KEY `ORDERITEM_ORDER_INDEX` (`ORDER_ID`),
+  KEY `ORDERITEM_TYPE_INDEX` (`ORDER_ITEM_TYPE`),
+  KEY `ORDERITEM_PARENT_INDEX` (`PARENT_ORDER_ITEM_ID`),
+  KEY `ORDERITEM_MESSAGE_INDEX` (`PERSONAL_MESSAGE_ID`),
+  KEY `FK9A2E704A15D1A13D` (`CATEGORY_ID`),
+  KEY `FK9A2E704AFD2F1F10` (`GIFT_WRAP_ITEM_ID`),
+  KEY `FK9A2E704A89FE8A02` (`ORDER_ID`),
+  KEY `FK9A2E704AB0B0D00A` (`PARENT_ORDER_ITEM_ID`),
+  KEY `FK9A2E704A77F565E1` (`PERSONAL_MESSAGE_ID`),
+  CONSTRAINT `FK9A2E704A15D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK9A2E704A77F565E1` FOREIGN KEY (`PERSONAL_MESSAGE_ID`) REFERENCES `blc_personal_message` (`PERSONAL_MESSAGE_ID`),
+  CONSTRAINT `FK9A2E704A89FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FK9A2E704AB0B0D00A` FOREIGN KEY (`PARENT_ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK9A2E704AFD2F1F10` FOREIGN KEY (`GIFT_WRAP_ITEM_ID`) REFERENCES `blc_giftwrap_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_item_add_attr
+CREATE TABLE IF NOT EXISTS `blc_order_item_add_attr` (
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  `VALUE` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ID`,`NAME`),
+  KEY `FKA466AB44B76B9466` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKA466AB44B76B9466` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_discrete_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_item_adjustment
+CREATE TABLE IF NOT EXISTS `blc_order_item_adjustment` (
+  `ORDER_ITEM_ADJUSTMENT_ID` bigint(20) NOT NULL,
+  `APPLIED_TO_SALE_PRICE` tinyint(1) DEFAULT NULL,
+  `ADJUSTMENT_REASON` varchar(255) NOT NULL,
+  `ADJUSTMENT_VALUE` decimal(19,5) NOT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ADJUSTMENT_ID`),
+  KEY `OIADJUST_OFFER_INDEX` (`OFFER_ID`),
+  KEY `OIADJUST_ITEM_INDEX` (`ORDER_ITEM_ID`),
+  KEY `FKA2658C82D5F3FAF4` (`OFFER_ID`),
+  KEY `FKA2658C829AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKA2658C829AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKA2658C82D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_item_attribute
+CREATE TABLE IF NOT EXISTS `blc_order_item_attribute` (
+  `ORDER_ITEM_ATTRIBUTE_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `VALUE` varchar(255) NOT NULL,
+  `ORDER_ITEM_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`ORDER_ITEM_ATTRIBUTE_ID`),
+  KEY `FK9F1ED0C79AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK9F1ED0C79AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_item_dtl_adj
+CREATE TABLE IF NOT EXISTS `blc_order_item_dtl_adj` (
+  `ORDER_ITEM_DTL_ADJ_ID` bigint(20) NOT NULL,
+  `APPLIED_TO_SALE_PRICE` tinyint(1) DEFAULT NULL,
+  `OFFER_NAME` varchar(255) DEFAULT NULL,
+  `ADJUSTMENT_REASON` varchar(255) NOT NULL,
+  `ADJUSTMENT_VALUE` decimal(19,5) NOT NULL,
+  `OFFER_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_PRICE_DTL_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ITEM_DTL_ADJ_ID`),
+  KEY `FK85F0248FD5F3FAF4` (`OFFER_ID`),
+  KEY `FK85F0248FD4AEA2C0` (`ORDER_ITEM_PRICE_DTL_ID`),
+  CONSTRAINT `FK85F0248FD4AEA2C0` FOREIGN KEY (`ORDER_ITEM_PRICE_DTL_ID`) REFERENCES `blc_order_item_price_dtl` (`ORDER_ITEM_PRICE_DTL_ID`),
+  CONSTRAINT `FK85F0248FD5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_item_price_dtl
+CREATE TABLE IF NOT EXISTS `blc_order_item_price_dtl` (
+  `ORDER_ITEM_PRICE_DTL_ID` bigint(20) NOT NULL,
+  `QUANTITY` int(11) NOT NULL,
+  `USE_SALE_PRICE` tinyint(1) DEFAULT NULL,
+  `ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_ITEM_PRICE_DTL_ID`),
+  KEY `FK1FB64BF19AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FK1FB64BF19AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_multiship_option
+CREATE TABLE IF NOT EXISTS `blc_order_multiship_option` (
+  `ORDER_MULTISHIP_OPTION_ID` bigint(20) NOT NULL,
+  `ADDRESS_ID` bigint(20) DEFAULT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) DEFAULT NULL,
+  `ORDER_ID` bigint(20) DEFAULT NULL,
+  `ORDER_ITEM_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_MULTISHIP_OPTION_ID`),
+  KEY `MULTISHIP_OPTION_ORDER_INDEX` (`ORDER_ID`),
+  KEY `FKB3D3F7D6C13085DD` (`ADDRESS_ID`),
+  KEY `FKB3D3F7D681F34C7F` (`FULFILLMENT_OPTION_ID`),
+  KEY `FKB3D3F7D689FE8A02` (`ORDER_ID`),
+  KEY `FKB3D3F7D69AF166DF` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKB3D3F7D681F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FKB3D3F7D689FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FKB3D3F7D69AF166DF` FOREIGN KEY (`ORDER_ITEM_ID`) REFERENCES `blc_order_item` (`ORDER_ITEM_ID`),
+  CONSTRAINT `FKB3D3F7D6C13085DD` FOREIGN KEY (`ADDRESS_ID`) REFERENCES `blc_address` (`ADDRESS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_offer_code_xref
+CREATE TABLE IF NOT EXISTS `blc_order_offer_code_xref` (
+  `ORDER_ID` bigint(20) NOT NULL,
+  `OFFER_CODE_ID` bigint(20) NOT NULL,
+  KEY `FKFDF0E8533BB10F6D` (`OFFER_CODE_ID`),
+  KEY `FKFDF0E85389FE8A02` (`ORDER_ID`),
+  CONSTRAINT `FKFDF0E8533BB10F6D` FOREIGN KEY (`OFFER_CODE_ID`) REFERENCES `blc_offer_code` (`OFFER_CODE_ID`),
+  CONSTRAINT `FKFDF0E85389FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_payment
+CREATE TABLE IF NOT EXISTS `blc_order_payment` (
+  `ORDER_PAYMENT_ID` bigint(20) NOT NULL,
+  `AMOUNT` decimal(19,5) DEFAULT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `GATEWAY_TYPE` varchar(255) DEFAULT NULL,
+  `REFERENCE_NUMBER` varchar(255) DEFAULT NULL,
+  `PAYMENT_TYPE` varchar(255) NOT NULL,
+  `ADDRESS_ID` bigint(20) DEFAULT NULL,
+  `ORDER_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ORDER_PAYMENT_ID`),
+  KEY `ORDERPAYMENT_ADDRESS_INDEX` (`ADDRESS_ID`),
+  KEY `ORDERPAYMENT_ORDER_INDEX` (`ORDER_ID`),
+  KEY `ORDERPAYMENT_REFERENCE_INDEX` (`REFERENCE_NUMBER`),
+  KEY `ORDERPAYMENT_TYPE_INDEX` (`PAYMENT_TYPE`),
+  KEY `FK9517A14FC13085DD` (`ADDRESS_ID`),
+  KEY `FK9517A14F89FE8A02` (`ORDER_ID`),
+  CONSTRAINT `FK9517A14F89FE8A02` FOREIGN KEY (`ORDER_ID`) REFERENCES `blc_order` (`ORDER_ID`),
+  CONSTRAINT `FK9517A14FC13085DD` FOREIGN KEY (`ADDRESS_ID`) REFERENCES `blc_address` (`ADDRESS_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_order_payment_transaction
+CREATE TABLE IF NOT EXISTS `blc_order_payment_transaction` (
+  `PAYMENT_TRANSACTION_ID` bigint(20) NOT NULL,
+  `TRANSACTION_AMOUNT` decimal(19,2) DEFAULT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `CUSTOMER_IP_ADDRESS` varchar(255) DEFAULT NULL,
+  `DATE_RECORDED` datetime DEFAULT NULL,
+  `RAW_RESPONSE` longtext,
+  `SUCCESS` tinyint(1) DEFAULT NULL,
+  `TRANSACTION_TYPE` varchar(255) DEFAULT NULL,
+  `ORDER_PAYMENT` bigint(20) NOT NULL,
+  `PARENT_TRANSACTION` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`PAYMENT_TRANSACTION_ID`),
+  KEY `FK86FDE7CE6A69DD9D` (`ORDER_PAYMENT`),
+  KEY `FK86FDE7CEE1B66C71` (`PARENT_TRANSACTION`),
+  CONSTRAINT `FK86FDE7CE6A69DD9D` FOREIGN KEY (`ORDER_PAYMENT`) REFERENCES `blc_order_payment` (`ORDER_PAYMENT_ID`),
+  CONSTRAINT `FK86FDE7CEE1B66C71` FOREIGN KEY (`PARENT_TRANSACTION`) REFERENCES `blc_order_payment_transaction` (`PAYMENT_TRANSACTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page
+CREATE TABLE IF NOT EXISTS `blc_page` (
+  `PAGE_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `EXCLUDE_FROM_SITE_MAP` tinyint(1) DEFAULT NULL,
+  `FULL_URL` varchar(255) DEFAULT NULL,
+  `OFFLINE_FLAG` tinyint(1) DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `PAGE_TMPLT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`PAGE_ID`),
+  KEY `PAGE_FULL_URL_INDEX` (`FULL_URL`),
+  KEY `FKF41BEDD5D49D3961` (`PAGE_TMPLT_ID`),
+  CONSTRAINT `FKF41BEDD5D49D3961` FOREIGN KEY (`PAGE_TMPLT_ID`) REFERENCES `blc_page_tmplt` (`PAGE_TMPLT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page_fld
+CREATE TABLE IF NOT EXISTS `blc_page_fld` (
+  `PAGE_FLD_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `FLD_KEY` varchar(255) DEFAULT NULL,
+  `LOB_VALUE` longtext,
+  `VALUE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`PAGE_FLD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page_fld_map
+CREATE TABLE IF NOT EXISTS `blc_page_fld_map` (
+  `PAGE_ID` bigint(20) NOT NULL,
+  `PAGE_FLD_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`PAGE_ID`,`MAP_KEY`),
+  KEY `FKE9EE09515AEDD08A` (`PAGE_FLD_ID`),
+  KEY `FKE9EE0951883C2667` (`PAGE_ID`),
+  CONSTRAINT `FKE9EE09515AEDD08A` FOREIGN KEY (`PAGE_FLD_ID`) REFERENCES `blc_page_fld` (`PAGE_FLD_ID`),
+  CONSTRAINT `FKE9EE0951883C2667` FOREIGN KEY (`PAGE_ID`) REFERENCES `blc_page` (`PAGE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page_item_criteria
+CREATE TABLE IF NOT EXISTS `blc_page_item_criteria` (
+  `PAGE_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_MATCH_RULE` longtext,
+  `QUANTITY` int(11) NOT NULL,
+  PRIMARY KEY (`PAGE_ITEM_CRITERIA_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page_rule
+CREATE TABLE IF NOT EXISTS `blc_page_rule` (
+  `PAGE_RULE_ID` bigint(20) NOT NULL,
+  `MATCH_RULE` longtext,
+  PRIMARY KEY (`PAGE_RULE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page_rule_map
+CREATE TABLE IF NOT EXISTS `blc_page_rule_map` (
+  `BLC_PAGE_PAGE_ID` bigint(20) NOT NULL,
+  `PAGE_RULE_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`BLC_PAGE_PAGE_ID`,`MAP_KEY`),
+  KEY `FK1ABA0CA336D91846` (`PAGE_RULE_ID`),
+  KEY `FK1ABA0CA3C38455DD` (`BLC_PAGE_PAGE_ID`),
+  CONSTRAINT `FK1ABA0CA336D91846` FOREIGN KEY (`PAGE_RULE_ID`) REFERENCES `blc_page_rule` (`PAGE_RULE_ID`),
+  CONSTRAINT `FK1ABA0CA3C38455DD` FOREIGN KEY (`BLC_PAGE_PAGE_ID`) REFERENCES `blc_page` (`PAGE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_page_tmplt
+CREATE TABLE IF NOT EXISTS `blc_page_tmplt` (
+  `PAGE_TMPLT_ID` bigint(20) NOT NULL,
+  `TMPLT_DESCR` varchar(255) DEFAULT NULL,
+  `TMPLT_NAME` varchar(255) DEFAULT NULL,
+  `TMPLT_PATH` varchar(255) DEFAULT NULL,
+  `LOCALE_CODE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`PAGE_TMPLT_ID`),
+  KEY `FK325C9D5A1E1C128` (`LOCALE_CODE`),
+  CONSTRAINT `FK325C9D5A1E1C128` FOREIGN KEY (`LOCALE_CODE`) REFERENCES `blc_locale` (`LOCALE_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_payment_log
+CREATE TABLE IF NOT EXISTS `blc_payment_log` (
+  `PAYMENT_LOG_ID` bigint(20) NOT NULL,
+  `AMOUNT_PAID` decimal(19,5) DEFAULT NULL,
+  `EXCEPTION_MESSAGE` varchar(255) DEFAULT NULL,
+  `LOG_TYPE` varchar(255) NOT NULL,
+  `ORDER_PAYMENT_ID` bigint(20) DEFAULT NULL,
+  `ORDER_PAYMENT_REF_NUM` varchar(255) DEFAULT NULL,
+  `TRANSACTION_SUCCESS` tinyint(1) DEFAULT NULL,
+  `TRANSACTION_TIMESTAMP` datetime NOT NULL,
+  `TRANSACTION_TYPE` varchar(255) NOT NULL,
+  `USER_NAME` varchar(255) NOT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  `CUSTOMER_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`PAYMENT_LOG_ID`),
+  KEY `PAYMENTLOG_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `PAYMENTLOG_LOGTYPE_INDEX` (`LOG_TYPE`),
+  KEY `PAYMENTLOG_ORDERPAYMENT_INDEX` (`ORDER_PAYMENT_ID`),
+  KEY `PAYMENTLOG_REFERENCE_INDEX` (`ORDER_PAYMENT_REF_NUM`),
+  KEY `PAYMENTLOG_TRANTYPE_INDEX` (`TRANSACTION_TYPE`),
+  KEY `PAYMENTLOG_USER_INDEX` (`USER_NAME`),
+  KEY `FKA43703453E2FC4F9` (`CURRENCY_CODE`),
+  KEY `FKA43703457470F437` (`CUSTOMER_ID`),
+  CONSTRAINT `FKA43703453E2FC4F9` FOREIGN KEY (`CURRENCY_CODE`) REFERENCES `blc_currency` (`CURRENCY_CODE`),
+  CONSTRAINT `FKA43703457470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_personal_message
+CREATE TABLE IF NOT EXISTS `blc_personal_message` (
+  `PERSONAL_MESSAGE_ID` bigint(20) NOT NULL,
+  `MESSAGE` varchar(255) DEFAULT NULL,
+  `MESSAGE_FROM` varchar(255) DEFAULT NULL,
+  `MESSAGE_TO` varchar(255) DEFAULT NULL,
+  `OCCASION` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`PERSONAL_MESSAGE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_pgtmplt_fldgrp_xref
+CREATE TABLE IF NOT EXISTS `blc_pgtmplt_fldgrp_xref` (
+  `PAGE_TMPLT_ID` bigint(20) NOT NULL,
+  `FLD_GROUP_ID` bigint(20) NOT NULL,
+  `GROUP_ORDER` int(11) NOT NULL,
+  PRIMARY KEY (`PAGE_TMPLT_ID`,`GROUP_ORDER`),
+  KEY `FK99D625F66A79BDB5` (`FLD_GROUP_ID`),
+  KEY `FK99D625F6D49D3961` (`PAGE_TMPLT_ID`),
+  CONSTRAINT `FK99D625F66A79BDB5` FOREIGN KEY (`FLD_GROUP_ID`) REFERENCES `blc_fld_group` (`FLD_GROUP_ID`),
+  CONSTRAINT `FK99D625F6D49D3961` FOREIGN KEY (`PAGE_TMPLT_ID`) REFERENCES `blc_page_tmplt` (`PAGE_TMPLT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_phone
+CREATE TABLE IF NOT EXISTS `blc_phone` (
+  `PHONE_ID` bigint(20) NOT NULL,
+  `IS_ACTIVE` tinyint(1) DEFAULT NULL,
+  `IS_DEFAULT` tinyint(1) DEFAULT NULL,
+  `PHONE_NUMBER` varchar(255) NOT NULL,
+  PRIMARY KEY (`PHONE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product
+CREATE TABLE IF NOT EXISTS `blc_product` (
+  `PRODUCT_ID` bigint(20) NOT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `CAN_SELL_WITHOUT_OPTIONS` tinyint(1) DEFAULT NULL,
+  `DISPLAY_TEMPLATE` varchar(255) DEFAULT NULL,
+  `IS_FEATURED_PRODUCT` tinyint(1) NOT NULL,
+  `MANUFACTURE` varchar(255) DEFAULT NULL,
+  `MODEL` varchar(255) DEFAULT NULL,
+  `URL` varchar(255) DEFAULT NULL,
+  `URL_KEY` varchar(255) DEFAULT NULL,
+  `DEFAULT_CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `DEFAULT_SKU_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`PRODUCT_ID`),
+  KEY `PRODUCT_CATEGORY_INDEX` (`DEFAULT_CATEGORY_ID`),
+  KEY `PRODUCT_URL_INDEX` (`URL`,`URL_KEY`),
+  KEY `FK5B95B7C9DF057C3F` (`DEFAULT_CATEGORY_ID`),
+  KEY `FK5B95B7C96D386535` (`DEFAULT_SKU_ID`),
+  CONSTRAINT `FK5B95B7C96D386535` FOREIGN KEY (`DEFAULT_SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`),
+  CONSTRAINT `FK5B95B7C9DF057C3F` FOREIGN KEY (`DEFAULT_CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_attribute
+CREATE TABLE IF NOT EXISTS `blc_product_attribute` (
+  `PRODUCT_ATTRIBUTE_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `SEARCHABLE` tinyint(1) DEFAULT NULL,
+  `VALUE` varchar(255) DEFAULT NULL,
+  `PRODUCT_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`PRODUCT_ATTRIBUTE_ID`),
+  KEY `PRODUCTATTRIBUTE_NAME_INDEX` (`NAME`),
+  KEY `PRODUCTATTRIBUTE_INDEX` (`PRODUCT_ID`),
+  KEY `FK56CE05865F11A0B7` (`PRODUCT_ID`),
+  CONSTRAINT `FK56CE05865F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_bundle
+CREATE TABLE IF NOT EXISTS `blc_product_bundle` (
+  `AUTO_BUNDLE` tinyint(1) DEFAULT NULL,
+  `BUNDLE_PROMOTABLE` tinyint(1) DEFAULT NULL,
+  `ITEMS_PROMOTABLE` tinyint(1) DEFAULT NULL,
+  `PRICING_MODEL` varchar(255) DEFAULT NULL,
+  `BUNDLE_PRIORITY` int(11) DEFAULT NULL,
+  `PRODUCT_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`PRODUCT_ID`),
+  KEY `FK8CC5B85F11A0B7` (`PRODUCT_ID`),
+  CONSTRAINT `FK8CC5B85F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_cross_sale
+CREATE TABLE IF NOT EXISTS `blc_product_cross_sale` (
+  `CROSS_SALE_PRODUCT_ID` bigint(20) NOT NULL,
+  `PROMOTION_MESSAGE` varchar(255) DEFAULT NULL,
+  `SEQUENCE` decimal(10,6) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `PRODUCT_ID` bigint(20) DEFAULT NULL,
+  `RELATED_SALE_PRODUCT_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`CROSS_SALE_PRODUCT_ID`),
+  KEY `CROSSSALE_CATEGORY_INDEX` (`CATEGORY_ID`),
+  KEY `CROSSSALE_INDEX` (`PRODUCT_ID`),
+  KEY `CROSSSALE_RELATED_INDEX` (`RELATED_SALE_PRODUCT_ID`),
+  KEY `FK8324FB3C15D1A13D` (`CATEGORY_ID`),
+  KEY `FK8324FB3C5F11A0B7` (`PRODUCT_ID`),
+  KEY `FK8324FB3C62D84F9B` (`RELATED_SALE_PRODUCT_ID`),
+  CONSTRAINT `FK8324FB3C15D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK8324FB3C5F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`),
+  CONSTRAINT `FK8324FB3C62D84F9B` FOREIGN KEY (`RELATED_SALE_PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_featured
+CREATE TABLE IF NOT EXISTS `blc_product_featured` (
+  `FEATURED_PRODUCT_ID` bigint(20) NOT NULL,
+  `PROMOTION_MESSAGE` varchar(255) DEFAULT NULL,
+  `SEQUENCE` decimal(10,6) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `PRODUCT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`FEATURED_PRODUCT_ID`),
+  KEY `PRODFEATURED_CATEGORY_INDEX` (`CATEGORY_ID`),
+  KEY `PRODFEATURED_PRODUCT_INDEX` (`PRODUCT_ID`),
+  KEY `FK4C49FFE415D1A13D` (`CATEGORY_ID`),
+  KEY `FK4C49FFE45F11A0B7` (`PRODUCT_ID`),
+  CONSTRAINT `FK4C49FFE415D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FK4C49FFE45F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_option
+CREATE TABLE IF NOT EXISTS `blc_product_option` (
+  `PRODUCT_OPTION_ID` bigint(20) NOT NULL,
+  `ATTRIBUTE_NAME` varchar(255) DEFAULT NULL,
+  `DISPLAY_ORDER` int(11) DEFAULT NULL,
+  `ERROR_CODE` varchar(255) DEFAULT NULL,
+  `ERROR_MESSAGE` varchar(255) DEFAULT NULL,
+  `LABEL` varchar(255) DEFAULT NULL,
+  `VALIDATION_STRATEGY_TYPE` varchar(255) DEFAULT NULL,
+  `VALIDATION_TYPE` varchar(255) DEFAULT NULL,
+  `REQUIRED` tinyint(1) DEFAULT NULL,
+  `OPTION_TYPE` varchar(255) DEFAULT NULL,
+  `USE_IN_SKU_GENERATION` tinyint(1) DEFAULT NULL,
+  `VALIDATION_STRING` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`PRODUCT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_option_value
+CREATE TABLE IF NOT EXISTS `blc_product_option_value` (
+  `PRODUCT_OPTION_VALUE_ID` bigint(20) NOT NULL,
+  `ATTRIBUTE_VALUE` varchar(255) DEFAULT NULL,
+  `DISPLAY_ORDER` bigint(20) DEFAULT NULL,
+  `PRICE_ADJUSTMENT` decimal(19,5) DEFAULT NULL,
+  `PRODUCT_OPTION_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`PRODUCT_OPTION_VALUE_ID`),
+  KEY `FK6DEEEDBD92EA8136` (`PRODUCT_OPTION_ID`),
+  CONSTRAINT `FK6DEEEDBD92EA8136` FOREIGN KEY (`PRODUCT_OPTION_ID`) REFERENCES `blc_product_option` (`PRODUCT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_option_xref
+CREATE TABLE IF NOT EXISTS `blc_product_option_xref` (
+  `PRODUCT_OPTION_XREF_ID` bigint(20) NOT NULL,
+  `PRODUCT_ID` bigint(20) NOT NULL,
+  `PRODUCT_OPTION_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`PRODUCT_OPTION_XREF_ID`),
+  KEY `FKDA42AB2F5F11A0B7` (`PRODUCT_ID`),
+  KEY `FKDA42AB2F92EA8136` (`PRODUCT_OPTION_ID`),
+  CONSTRAINT `FKDA42AB2F5F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`),
+  CONSTRAINT `FKDA42AB2F92EA8136` FOREIGN KEY (`PRODUCT_OPTION_ID`) REFERENCES `blc_product_option` (`PRODUCT_OPTION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_sku_xref
+CREATE TABLE IF NOT EXISTS `blc_product_sku_xref` (
+  `PRODUCT_ID` bigint(20) DEFAULT NULL,
+  `SKU_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SKU_ID`),
+  KEY `FKF2DBF6D35F11A0B7` (`PRODUCT_ID`),
+  KEY `FKF2DBF6D3B78C9977` (`SKU_ID`),
+  CONSTRAINT `FKF2DBF6D35F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`),
+  CONSTRAINT `FKF2DBF6D3B78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_product_up_sale
+CREATE TABLE IF NOT EXISTS `blc_product_up_sale` (
+  `UP_SALE_PRODUCT_ID` bigint(20) NOT NULL,
+  `PROMOTION_MESSAGE` varchar(255) DEFAULT NULL,
+  `SEQUENCE` decimal(10,6) DEFAULT NULL,
+  `CATEGORY_ID` bigint(20) DEFAULT NULL,
+  `PRODUCT_ID` bigint(20) DEFAULT NULL,
+  `RELATED_SALE_PRODUCT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`UP_SALE_PRODUCT_ID`),
+  KEY `UPSALE_CATEGORY_INDEX` (`CATEGORY_ID`),
+  KEY `UPSALE_PRODUCT_INDEX` (`PRODUCT_ID`),
+  KEY `UPSALE_RELATED_INDEX` (`RELATED_SALE_PRODUCT_ID`),
+  KEY `FKF69054F515D1A13D` (`CATEGORY_ID`),
+  KEY `FKF69054F55F11A0B7` (`PRODUCT_ID`),
+  KEY `FKF69054F562D84F9B` (`RELATED_SALE_PRODUCT_ID`),
+  CONSTRAINT `FKF69054F515D1A13D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `blc_category` (`CATEGORY_ID`),
+  CONSTRAINT `FKF69054F55F11A0B7` FOREIGN KEY (`PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`),
+  CONSTRAINT `FKF69054F562D84F9B` FOREIGN KEY (`RELATED_SALE_PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_qual_crit_offer_xref
+CREATE TABLE IF NOT EXISTS `blc_qual_crit_offer_xref` (
+  `OFFER_ID` bigint(20) NOT NULL,
+  `OFFER_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`OFFER_ID`,`OFFER_ITEM_CRITERIA_ID`),
+  UNIQUE KEY `UK_D592E919E7AB0252` (`OFFER_ITEM_CRITERIA_ID`),
+  KEY `FKD592E919D5F3FAF4` (`OFFER_ID`),
+  KEY `FKD592E9193615A91A` (`OFFER_ITEM_CRITERIA_ID`),
+  CONSTRAINT `FKD592E9193615A91A` FOREIGN KEY (`OFFER_ITEM_CRITERIA_ID`) REFERENCES `blc_offer_item_criteria` (`OFFER_ITEM_CRITERIA_ID`),
+  CONSTRAINT `FKD592E919D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_qual_crit_page_xref
+CREATE TABLE IF NOT EXISTS `blc_qual_crit_page_xref` (
+  `PAGE_ID` bigint(20) NOT NULL DEFAULT '0',
+  `PAGE_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`PAGE_ID`,`PAGE_ITEM_CRITERIA_ID`),
+  UNIQUE KEY `UK_874BE5902B6BC67F` (`PAGE_ITEM_CRITERIA_ID`),
+  KEY `FK874BE590883C2667` (`PAGE_ID`),
+  KEY `FK874BE590378418CD` (`PAGE_ITEM_CRITERIA_ID`),
+  CONSTRAINT `FK874BE590378418CD` FOREIGN KEY (`PAGE_ITEM_CRITERIA_ID`) REFERENCES `blc_page_item_criteria` (`PAGE_ITEM_CRITERIA_ID`),
+  CONSTRAINT `FK874BE590883C2667` FOREIGN KEY (`PAGE_ID`) REFERENCES `blc_page` (`PAGE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_qual_crit_sc_xref
+CREATE TABLE IF NOT EXISTS `blc_qual_crit_sc_xref` (
+  `SC_ID` bigint(20) NOT NULL,
+  `SC_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SC_ID`,`SC_ITEM_CRITERIA_ID`),
+  UNIQUE KEY `UK_C4A353AFFF06F4DE` (`SC_ITEM_CRITERIA_ID`),
+  KEY `FKC4A353AF13D95585` (`SC_ID`),
+  KEY `FKC4A353AF85C77F2B` (`SC_ITEM_CRITERIA_ID`),
+  CONSTRAINT `FKC4A353AF13D95585` FOREIGN KEY (`SC_ID`) REFERENCES `blc_sc` (`SC_ID`),
+  CONSTRAINT `FKC4A353AF85C77F2B` FOREIGN KEY (`SC_ITEM_CRITERIA_ID`) REFERENCES `blc_sc_item_criteria` (`SC_ITEM_CRITERIA_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_rating_detail
+CREATE TABLE IF NOT EXISTS `blc_rating_detail` (
+  `RATING_DETAIL_ID` bigint(20) NOT NULL,
+  `RATING` double NOT NULL,
+  `RATING_SUBMITTED_DATE` datetime NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `RATING_SUMMARY_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`RATING_DETAIL_ID`),
+  KEY `RATING_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `FKC9D04AD7470F437` (`CUSTOMER_ID`),
+  KEY `FKC9D04ADD4E76BF4` (`RATING_SUMMARY_ID`),
+  CONSTRAINT `FKC9D04AD7470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FKC9D04ADD4E76BF4` FOREIGN KEY (`RATING_SUMMARY_ID`) REFERENCES `blc_rating_summary` (`RATING_SUMMARY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_rating_summary
+CREATE TABLE IF NOT EXISTS `blc_rating_summary` (
+  `RATING_SUMMARY_ID` bigint(20) NOT NULL,
+  `AVERAGE_RATING` double NOT NULL,
+  `ITEM_ID` varchar(255) NOT NULL,
+  `RATING_TYPE` varchar(255) NOT NULL,
+  PRIMARY KEY (`RATING_SUMMARY_ID`),
+  KEY `RATINGSUMM_ITEM_INDEX` (`ITEM_ID`),
+  KEY `RATINGSUMM_TYPE_INDEX` (`RATING_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_review_detail
+CREATE TABLE IF NOT EXISTS `blc_review_detail` (
+  `REVIEW_DETAIL_ID` bigint(20) NOT NULL,
+  `HELPFUL_COUNT` int(11) NOT NULL,
+  `NOT_HELPFUL_COUNT` int(11) NOT NULL,
+  `REVIEW_SUBMITTED_DATE` datetime NOT NULL,
+  `REVIEW_STATUS` varchar(255) NOT NULL,
+  `REVIEW_TEXT` varchar(255) NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `RATING_DETAIL_ID` bigint(20) DEFAULT NULL,
+  `RATING_SUMMARY_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`REVIEW_DETAIL_ID`),
+  KEY `REVIEWDETAIL_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `REVIEWDETAIL_RATING_INDEX` (`RATING_DETAIL_ID`),
+  KEY `REVIEWDETAIL_SUMMARY_INDEX` (`RATING_SUMMARY_ID`),
+  KEY `REVIEWDETAIL_STATUS_INDEX` (`REVIEW_STATUS`),
+  KEY `FK9CD7E6927470F437` (`CUSTOMER_ID`),
+  KEY `FK9CD7E69245DC39E0` (`RATING_DETAIL_ID`),
+  KEY `FK9CD7E692D4E76BF4` (`RATING_SUMMARY_ID`),
+  CONSTRAINT `FK9CD7E69245DC39E0` FOREIGN KEY (`RATING_DETAIL_ID`) REFERENCES `blc_rating_detail` (`RATING_DETAIL_ID`),
+  CONSTRAINT `FK9CD7E6927470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK9CD7E692D4E76BF4` FOREIGN KEY (`RATING_SUMMARY_ID`) REFERENCES `blc_rating_summary` (`RATING_SUMMARY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_review_feedback
+CREATE TABLE IF NOT EXISTS `blc_review_feedback` (
+  `REVIEW_FEEDBACK_ID` bigint(20) NOT NULL,
+  `IS_HELPFUL` tinyint(1) NOT NULL,
+  `CUSTOMER_ID` bigint(20) NOT NULL,
+  `REVIEW_DETAIL_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`REVIEW_FEEDBACK_ID`),
+  KEY `REVIEWFEED_CUSTOMER_INDEX` (`CUSTOMER_ID`),
+  KEY `REVIEWFEED_DETAIL_INDEX` (`REVIEW_DETAIL_ID`),
+  KEY `FK7CC929867470F437` (`CUSTOMER_ID`),
+  KEY `FK7CC92986AE4769D6` (`REVIEW_DETAIL_ID`),
+  CONSTRAINT `FK7CC929867470F437` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `blc_customer` (`CUSTOMER_ID`),
+  CONSTRAINT `FK7CC92986AE4769D6` FOREIGN KEY (`REVIEW_DETAIL_ID`) REFERENCES `blc_review_detail` (`REVIEW_DETAIL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_role
+CREATE TABLE IF NOT EXISTS `blc_role` (
+  `ROLE_ID` bigint(20) NOT NULL,
+  `ROLE_NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`ROLE_ID`),
+  KEY `ROLE_NAME_INDEX` (`ROLE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sandbox
+CREATE TABLE IF NOT EXISTS `blc_sandbox` (
+  `SANDBOX_ID` bigint(20) NOT NULL,
+  `AUTHOR` bigint(20) DEFAULT NULL,
+  `COLOR` varchar(255) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `GO_LIVE_DATE` datetime DEFAULT NULL,
+  `SANDBOX_NAME` varchar(255) DEFAULT NULL,
+  `SANDBOX_TYPE` varchar(255) DEFAULT NULL,
+  `PARENT_SANDBOX_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`SANDBOX_ID`),
+  KEY `SANDBOX_NAME_INDEX` (`SANDBOX_NAME`),
+  KEY `FKDD37A9A174160452` (`PARENT_SANDBOX_ID`),
+  CONSTRAINT `FKDD37A9A174160452` FOREIGN KEY (`PARENT_SANDBOX_ID`) REFERENCES `blc_sandbox` (`SANDBOX_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sandbox_mgmt
+CREATE TABLE IF NOT EXISTS `blc_sandbox_mgmt` (
+  `SANDBOX_MGMT_ID` bigint(20) NOT NULL,
+  `SANDBOX_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SANDBOX_MGMT_ID`),
+  UNIQUE KEY `UK_4845009FE52B6993` (`SANDBOX_ID`),
+  KEY `FK4845009F579FE59D` (`SANDBOX_ID`),
+  CONSTRAINT `FK4845009F579FE59D` FOREIGN KEY (`SANDBOX_ID`) REFERENCES `blc_sandbox` (`SANDBOX_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc
+CREATE TABLE IF NOT EXISTS `blc_sc` (
+  `SC_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `CONTENT_NAME` varchar(255) NOT NULL,
+  `OFFLINE_FLAG` tinyint(1) DEFAULT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `LOCALE_CODE` varchar(255) NOT NULL,
+  `SC_TYPE_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`SC_ID`),
+  KEY `CONTENT_NAME_INDEX` (`CONTENT_NAME`),
+  KEY `SC_OFFLN_FLG_INDX` (`OFFLINE_FLAG`),
+  KEY `CONTENT_PRIORITY_INDEX` (`PRIORITY`),
+  KEY `FK74EEB716A1E1C128` (`LOCALE_CODE`),
+  KEY `FK74EEB71671EBFA46` (`SC_TYPE_ID`),
+  CONSTRAINT `FK74EEB71671EBFA46` FOREIGN KEY (`SC_TYPE_ID`) REFERENCES `blc_sc_type` (`SC_TYPE_ID`),
+  CONSTRAINT `FK74EEB716A1E1C128` FOREIGN KEY (`LOCALE_CODE`) REFERENCES `blc_locale` (`LOCALE_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_fld
+CREATE TABLE IF NOT EXISTS `blc_sc_fld` (
+  `SC_FLD_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `FLD_KEY` varchar(255) DEFAULT NULL,
+  `LOB_VALUE` longtext,
+  `VALUE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SC_FLD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_fldgrp_xref
+CREATE TABLE IF NOT EXISTS `blc_sc_fldgrp_xref` (
+  `SC_FLD_TMPLT_ID` bigint(20) NOT NULL,
+  `FLD_GROUP_ID` bigint(20) NOT NULL,
+  `GROUP_ORDER` int(11) NOT NULL,
+  PRIMARY KEY (`SC_FLD_TMPLT_ID`,`GROUP_ORDER`),
+  KEY `FK71612AEA6A79BDB5` (`FLD_GROUP_ID`),
+  KEY `FK71612AEAF6B0BA84` (`SC_FLD_TMPLT_ID`),
+  CONSTRAINT `FK71612AEA6A79BDB5` FOREIGN KEY (`FLD_GROUP_ID`) REFERENCES `blc_fld_group` (`FLD_GROUP_ID`),
+  CONSTRAINT `FK71612AEAF6B0BA84` FOREIGN KEY (`SC_FLD_TMPLT_ID`) REFERENCES `blc_sc_fld_tmplt` (`SC_FLD_TMPLT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_fld_map
+CREATE TABLE IF NOT EXISTS `blc_sc_fld_map` (
+  `SC_ID` bigint(20) NOT NULL,
+  `SC_FLD_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`SC_ID`,`MAP_KEY`),
+  KEY `FKD9480192DD6FD28A` (`SC_FLD_ID`),
+  KEY `FKD948019213D95585` (`SC_ID`),
+  CONSTRAINT `FKD948019213D95585` FOREIGN KEY (`SC_ID`) REFERENCES `blc_sc` (`SC_ID`),
+  CONSTRAINT `FKD9480192DD6FD28A` FOREIGN KEY (`SC_FLD_ID`) REFERENCES `blc_sc_fld` (`SC_FLD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_fld_tmplt
+CREATE TABLE IF NOT EXISTS `blc_sc_fld_tmplt` (
+  `SC_FLD_TMPLT_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SC_FLD_TMPLT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_item_criteria
+CREATE TABLE IF NOT EXISTS `blc_sc_item_criteria` (
+  `SC_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  `ORDER_ITEM_MATCH_RULE` longtext,
+  `QUANTITY` int(11) NOT NULL,
+  PRIMARY KEY (`SC_ITEM_CRITERIA_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_rule
+CREATE TABLE IF NOT EXISTS `blc_sc_rule` (
+  `SC_RULE_ID` bigint(20) NOT NULL,
+  `MATCH_RULE` longtext,
+  PRIMARY KEY (`SC_RULE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_rule_map
+CREATE TABLE IF NOT EXISTS `blc_sc_rule_map` (
+  `BLC_SC_SC_ID` bigint(20) NOT NULL,
+  `SC_RULE_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`BLC_SC_SC_ID`,`MAP_KEY`),
+  KEY `FK169F1C8256E51A06` (`SC_RULE_ID`),
+  KEY `FK169F1C82156E72FC` (`BLC_SC_SC_ID`),
+  CONSTRAINT `FK169F1C82156E72FC` FOREIGN KEY (`BLC_SC_SC_ID`) REFERENCES `blc_sc` (`SC_ID`),
+  CONSTRAINT `FK169F1C8256E51A06` FOREIGN KEY (`SC_RULE_ID`) REFERENCES `blc_sc_rule` (`SC_RULE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sc_type
+CREATE TABLE IF NOT EXISTS `blc_sc_type` (
+  `SC_TYPE_ID` bigint(20) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `SC_FLD_TMPLT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`SC_TYPE_ID`),
+  KEY `SC_TYPE_NAME_INDEX` (`NAME`),
+  KEY `FKE19886C3F6B0BA84` (`SC_FLD_TMPLT_ID`),
+  CONSTRAINT `FKE19886C3F6B0BA84` FOREIGN KEY (`SC_FLD_TMPLT_ID`) REFERENCES `blc_sc_fld_tmplt` (`SC_FLD_TMPLT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_search_facet
+CREATE TABLE IF NOT EXISTS `blc_search_facet` (
+  `SEARCH_FACET_ID` bigint(20) NOT NULL,
+  `MULTISELECT` tinyint(1) DEFAULT NULL,
+  `LABEL` varchar(255) DEFAULT NULL,
+  `REQUIRES_ALL_DEPENDENT` tinyint(1) DEFAULT NULL,
+  `SEARCH_DISPLAY_PRIORITY` int(11) DEFAULT NULL,
+  `SHOW_ON_SEARCH` tinyint(1) DEFAULT NULL,
+  `FIELD_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SEARCH_FACET_ID`),
+  KEY `FK4FFCC9863C3907C4` (`FIELD_ID`),
+  CONSTRAINT `FK4FFCC9863C3907C4` FOREIGN KEY (`FIELD_ID`) REFERENCES `blc_field` (`FIELD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_search_facet_range
+CREATE TABLE IF NOT EXISTS `blc_search_facet_range` (
+  `SEARCH_FACET_RANGE_ID` bigint(20) NOT NULL,
+  `MAX_VALUE` decimal(19,5) DEFAULT NULL,
+  `MIN_VALUE` decimal(19,5) NOT NULL,
+  `SEARCH_FACET_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`SEARCH_FACET_RANGE_ID`),
+  KEY `SEARCH_FACET_INDEX` (`SEARCH_FACET_ID`),
+  KEY `FK7EC3B124B96B1C93` (`SEARCH_FACET_ID`),
+  CONSTRAINT `FK7EC3B124B96B1C93` FOREIGN KEY (`SEARCH_FACET_ID`) REFERENCES `blc_search_facet` (`SEARCH_FACET_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_search_facet_xref
+CREATE TABLE IF NOT EXISTS `blc_search_facet_xref` (
+  `ID` bigint(20) NOT NULL,
+  `REQUIRED_FACET_ID` bigint(20) NOT NULL,
+  `SEARCH_FACET_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK35A63034DA7E1C7C` (`REQUIRED_FACET_ID`),
+  KEY `FK35A63034B96B1C93` (`SEARCH_FACET_ID`),
+  CONSTRAINT `FK35A63034B96B1C93` FOREIGN KEY (`SEARCH_FACET_ID`) REFERENCES `blc_search_facet` (`SEARCH_FACET_ID`),
+  CONSTRAINT `FK35A63034DA7E1C7C` FOREIGN KEY (`REQUIRED_FACET_ID`) REFERENCES `blc_search_facet` (`SEARCH_FACET_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_search_intercept
+CREATE TABLE IF NOT EXISTS `blc_search_intercept` (
+  `SEARCH_REDIRECT_ID` bigint(20) NOT NULL,
+  `ACTIVE_END_DATE` datetime DEFAULT NULL,
+  `ACTIVE_START_DATE` datetime DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `SEARCH_TERM` varchar(255) NOT NULL,
+  `URL` varchar(255) NOT NULL,
+  PRIMARY KEY (`SEARCH_REDIRECT_ID`),
+  KEY `SEARCH_ACTIVE_INDEX` (`ACTIVE_END_DATE`),
+  KEY `SEARCH_PRIORITY_INDEX` (`PRIORITY`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_search_synonym
+CREATE TABLE IF NOT EXISTS `blc_search_synonym` (
+  `SEARCH_SYNONYM_ID` bigint(20) NOT NULL,
+  `SYNONYMS` varchar(255) DEFAULT NULL,
+  `TERM` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SEARCH_SYNONYM_ID`),
+  KEY `SEARCHSYNONYM_TERM_INDEX` (`TERM`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_shipping_rate
+CREATE TABLE IF NOT EXISTS `blc_shipping_rate` (
+  `ID` bigint(20) NOT NULL,
+  `BAND_RESULT_PCT` int(11) NOT NULL,
+  `BAND_RESULT_QTY` decimal(19,2) NOT NULL,
+  `BAND_UNIT_QTY` decimal(19,2) NOT NULL,
+  `FEE_BAND` int(11) NOT NULL,
+  `FEE_SUB_TYPE` varchar(255) DEFAULT NULL,
+  `FEE_TYPE` varchar(255) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `SHIPPINGRATE_FEESUB_INDEX` (`FEE_SUB_TYPE`),
+  KEY `SHIPPINGRATE_FEE_INDEX` (`FEE_TYPE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_site
+CREATE TABLE IF NOT EXISTS `blc_site` (
+  `SITE_ID` bigint(20) NOT NULL,
+  `ARCHIVED` char(1) DEFAULT NULL,
+  `DEACTIVATED` tinyint(1) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `SITE_IDENTIFIER_TYPE` varchar(255) DEFAULT NULL,
+  `SITE_IDENTIFIER_VALUE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SITE_ID`),
+  KEY `BLC_SITE_ID_VAL_INDEX` (`SITE_IDENTIFIER_VALUE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_site_catalog
+CREATE TABLE IF NOT EXISTS `blc_site_catalog` (
+  `CATALOG_ID` bigint(20) NOT NULL,
+  `SITE_ID` bigint(20) NOT NULL,
+  KEY `FK5F3F2047843A8B63` (`SITE_ID`),
+  KEY `FK5F3F2047A350C7F1` (`CATALOG_ID`),
+  CONSTRAINT `FK5F3F2047843A8B63` FOREIGN KEY (`SITE_ID`) REFERENCES `blc_site` (`SITE_ID`),
+  CONSTRAINT `FK5F3F2047A350C7F1` FOREIGN KEY (`CATALOG_ID`) REFERENCES `blc_catalog` (`CATALOG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_site_map_cfg
+CREATE TABLE IF NOT EXISTS `blc_site_map_cfg` (
+  `INDEXED_SITE_MAP_FILE_NAME` varchar(255) DEFAULT NULL,
+  `INDEXED_SITE_MAP_FILE_PATTERN` varchar(255) DEFAULT NULL,
+  `MAX_URL_ENTRIES_PER_FILE` int(11) DEFAULT NULL,
+  `SITE_MAP_FILE_NAME` varchar(255) DEFAULT NULL,
+  `MODULE_CONFIG_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`MODULE_CONFIG_ID`),
+  KEY `FK7012930FC50D449` (`MODULE_CONFIG_ID`),
+  CONSTRAINT `FK7012930FC50D449` FOREIGN KEY (`MODULE_CONFIG_ID`) REFERENCES `blc_module_configuration` (`MODULE_CONFIG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_site_map_gen_cfg
+CREATE TABLE IF NOT EXISTS `blc_site_map_gen_cfg` (
+  `GEN_CONFIG_ID` bigint(20) NOT NULL,
+  `CHANGE_FREQ` varchar(255) NOT NULL,
+  `DISABLED` tinyint(1) NOT NULL,
+  `GENERATOR_TYPE` varchar(255) NOT NULL,
+  `PRIORITY` varchar(255) DEFAULT NULL,
+  `MODULE_CONFIG_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`GEN_CONFIG_ID`),
+  KEY `FK1D76000A340ED71` (`MODULE_CONFIG_ID`),
+  CONSTRAINT `FK1D76000A340ED71` FOREIGN KEY (`MODULE_CONFIG_ID`) REFERENCES `blc_site_map_cfg` (`MODULE_CONFIG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_site_map_url_entry
+CREATE TABLE IF NOT EXISTS `blc_site_map_url_entry` (
+  `URL_ENTRY_ID` bigint(20) NOT NULL,
+  `CHANGE_FREQ` varchar(255) NOT NULL,
+  `LAST_MODIFIED` datetime NOT NULL,
+  `LOCATION` varchar(255) NOT NULL,
+  `PRIORITY` varchar(255) NOT NULL,
+  `GEN_CONFIG_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`URL_ENTRY_ID`),
+  KEY `FKE2004FED36AFE1EE` (`GEN_CONFIG_ID`),
+  CONSTRAINT `FKE2004FED36AFE1EE` FOREIGN KEY (`GEN_CONFIG_ID`) REFERENCES `blc_cust_site_map_gen_cfg` (`GEN_CONFIG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku
+CREATE TABLE IF NOT EXISTS `blc_sku` (
+  `SKU_ID` bigint(20) NOT NULL,
+  `ACTIVE_END_DATE` datetime DEFAULT NULL,
+  `ACTIVE_START_DATE` datetime DEFAULT NULL,
+  `AVAILABLE_FLAG` char(1) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `CONTAINER_SHAPE` varchar(255) DEFAULT NULL,
+  `DEPTH` decimal(19,2) DEFAULT NULL,
+  `DIMENSION_UNIT_OF_MEASURE` varchar(255) DEFAULT NULL,
+  `GIRTH` decimal(19,2) DEFAULT NULL,
+  `HEIGHT` decimal(19,2) DEFAULT NULL,
+  `CONTAINER_SIZE` varchar(255) DEFAULT NULL,
+  `WIDTH` decimal(19,2) DEFAULT NULL,
+  `DISCOUNTABLE_FLAG` char(1) DEFAULT NULL,
+  `FULFILLMENT_TYPE` varchar(255) DEFAULT NULL,
+  `INVENTORY_TYPE` varchar(255) DEFAULT NULL,
+  `IS_MACHINE_SORTABLE` tinyint(1) DEFAULT NULL,
+  `LONG_DESCRIPTION` longtext,
+  `NAME` varchar(255) DEFAULT NULL,
+  `RETAIL_PRICE` decimal(19,5) DEFAULT NULL,
+  `SALE_PRICE` decimal(19,5) DEFAULT NULL,
+  `TAX_CODE` varchar(255) DEFAULT NULL,
+  `TAXABLE_FLAG` char(1) DEFAULT NULL,
+  `WEIGHT` decimal(19,2) DEFAULT NULL,
+  `WEIGHT_UNIT_OF_MEASURE` varchar(255) DEFAULT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  `DEFAULT_PRODUCT_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`SKU_ID`),
+  KEY `SKU_ACTIVE_END_INDEX` (`ACTIVE_END_DATE`),
+  KEY `SKU_ACTIVE_START_INDEX` (`ACTIVE_START_DATE`),
+  KEY `SKU_AVAILABLE_INDEX` (`AVAILABLE_FLAG`),
+  KEY `SKU_DISCOUNTABLE_INDEX` (`DISCOUNTABLE_FLAG`),
+  KEY `SKU_NAME_INDEX` (`NAME`),
+  KEY `SKU_TAXABLE_INDEX` (`TAXABLE_FLAG`),
+  KEY `FK28E82CF73E2FC4F9` (`CURRENCY_CODE`),
+  KEY `FK28E82CF77E555D75` (`DEFAULT_PRODUCT_ID`),
+  CONSTRAINT `FK28E82CF73E2FC4F9` FOREIGN KEY (`CURRENCY_CODE`) REFERENCES `blc_currency` (`CURRENCY_CODE`),
+  CONSTRAINT `FK28E82CF77E555D75` FOREIGN KEY (`DEFAULT_PRODUCT_ID`) REFERENCES `blc_product` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_attribute
+CREATE TABLE IF NOT EXISTS `blc_sku_attribute` (
+  `SKU_ATTR_ID` bigint(20) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `SEARCHABLE` tinyint(1) DEFAULT NULL,
+  `VALUE` varchar(255) NOT NULL,
+  `SKU_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SKU_ATTR_ID`),
+  KEY `SKUATTR_NAME_INDEX` (`NAME`),
+  KEY `SKUATTR_SKU_INDEX` (`SKU_ID`),
+  KEY `FK6C6A5934B78C9977` (`SKU_ID`),
+  CONSTRAINT `FK6C6A5934B78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_availability
+CREATE TABLE IF NOT EXISTS `blc_sku_availability` (
+  `SKU_AVAILABILITY_ID` bigint(20) NOT NULL,
+  `AVAILABILITY_DATE` datetime DEFAULT NULL,
+  `AVAILABILITY_STATUS` varchar(255) DEFAULT NULL,
+  `LOCATION_ID` bigint(20) DEFAULT NULL,
+  `QTY_ON_HAND` int(11) DEFAULT NULL,
+  `RESERVE_QTY` int(11) DEFAULT NULL,
+  `SKU_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`SKU_AVAILABILITY_ID`),
+  KEY `SKUAVAIL_STATUS_INDEX` (`AVAILABILITY_STATUS`),
+  KEY `SKUAVAIL_LOCATION_INDEX` (`LOCATION_ID`),
+  KEY `SKUAVAIL_SKU_INDEX` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_bundle_item
+CREATE TABLE IF NOT EXISTS `blc_sku_bundle_item` (
+  `SKU_BUNDLE_ITEM_ID` bigint(20) NOT NULL,
+  `ITEM_SALE_PRICE` decimal(19,5) DEFAULT NULL,
+  `QUANTITY` int(11) NOT NULL,
+  `PRODUCT_BUNDLE_ID` bigint(20) NOT NULL,
+  `SKU_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SKU_BUNDLE_ITEM_ID`),
+  KEY `FKD55968CCF29B96` (`PRODUCT_BUNDLE_ID`),
+  KEY `FKD55968B78C9977` (`SKU_ID`),
+  CONSTRAINT `FKD55968B78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`),
+  CONSTRAINT `FKD55968CCF29B96` FOREIGN KEY (`PRODUCT_BUNDLE_ID`) REFERENCES `blc_product_bundle` (`PRODUCT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_fee
+CREATE TABLE IF NOT EXISTS `blc_sku_fee` (
+  `SKU_FEE_ID` bigint(20) NOT NULL,
+  `AMOUNT` decimal(19,5) NOT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `EXPRESSION` longtext,
+  `FEE_TYPE` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
+  `TAXABLE` tinyint(1) DEFAULT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`SKU_FEE_ID`),
+  KEY `FKEEB7181E3E2FC4F9` (`CURRENCY_CODE`),
+  CONSTRAINT `FKEEB7181E3E2FC4F9` FOREIGN KEY (`CURRENCY_CODE`) REFERENCES `blc_currency` (`CURRENCY_CODE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_fee_xref
+CREATE TABLE IF NOT EXISTS `blc_sku_fee_xref` (
+  `SKU_FEE_ID` bigint(20) NOT NULL,
+  `SKU_ID` bigint(20) NOT NULL,
+  KEY `FKD88D409CB78C9977` (`SKU_ID`),
+  KEY `FKD88D409CCF4C9A82` (`SKU_FEE_ID`),
+  CONSTRAINT `FKD88D409CB78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`),
+  CONSTRAINT `FKD88D409CCF4C9A82` FOREIGN KEY (`SKU_FEE_ID`) REFERENCES `blc_sku_fee` (`SKU_FEE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_fulfillment_excluded
+CREATE TABLE IF NOT EXISTS `blc_sku_fulfillment_excluded` (
+  `SKU_ID` bigint(20) NOT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) NOT NULL,
+  KEY `FK84162D7381F34C7F` (`FULFILLMENT_OPTION_ID`),
+  KEY `FK84162D73B78C9977` (`SKU_ID`),
+  CONSTRAINT `FK84162D7381F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FK84162D73B78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_fulfillment_flat_rates
+CREATE TABLE IF NOT EXISTS `blc_sku_fulfillment_flat_rates` (
+  `SKU_ID` bigint(20) NOT NULL,
+  `RATE` decimal(19,5) DEFAULT NULL,
+  `FULFILLMENT_OPTION_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SKU_ID`,`FULFILLMENT_OPTION_ID`),
+  KEY `FKC1988C9681F34C7F` (`FULFILLMENT_OPTION_ID`),
+  KEY `FKC1988C96B78C9977` (`SKU_ID`),
+  CONSTRAINT `FKC1988C9681F34C7F` FOREIGN KEY (`FULFILLMENT_OPTION_ID`) REFERENCES `blc_fulfillment_option` (`FULFILLMENT_OPTION_ID`),
+  CONSTRAINT `FKC1988C96B78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_media_map
+CREATE TABLE IF NOT EXISTS `blc_sku_media_map` (
+  `BLC_SKU_SKU_ID` bigint(20) NOT NULL,
+  `MEDIA_ID` bigint(20) NOT NULL,
+  `MAP_KEY` varchar(255) NOT NULL,
+  PRIMARY KEY (`BLC_SKU_SKU_ID`,`MAP_KEY`),
+  KEY `FKEB4AECF96E4720E0` (`MEDIA_ID`),
+  KEY `FKEB4AECF9D93D857F` (`BLC_SKU_SKU_ID`),
+  CONSTRAINT `FKEB4AECF96E4720E0` FOREIGN KEY (`MEDIA_ID`) REFERENCES `blc_media` (`MEDIA_ID`),
+  CONSTRAINT `FKEB4AECF9D93D857F` FOREIGN KEY (`BLC_SKU_SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_sku_option_value_xref
+CREATE TABLE IF NOT EXISTS `blc_sku_option_value_xref` (
+  `SKU_ID` bigint(20) NOT NULL,
+  `PRODUCT_OPTION_VALUE_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`SKU_ID`,`PRODUCT_OPTION_VALUE_ID`),
+  KEY `FK7B61DC0BB0C16A73` (`PRODUCT_OPTION_VALUE_ID`),
+  KEY `FK7B61DC0BB78C9977` (`SKU_ID`),
+  CONSTRAINT `FK7B61DC0BB0C16A73` FOREIGN KEY (`PRODUCT_OPTION_VALUE_ID`) REFERENCES `blc_product_option_value` (`PRODUCT_OPTION_VALUE_ID`),
+  CONSTRAINT `FK7B61DC0BB78C9977` FOREIGN KEY (`SKU_ID`) REFERENCES `blc_sku` (`SKU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_state
+CREATE TABLE IF NOT EXISTS `blc_state` (
+  `ABBREVIATION` varchar(255) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `COUNTRY` varchar(255) NOT NULL,
+  PRIMARY KEY (`ABBREVIATION`),
+  KEY `STATE_NAME_INDEX` (`NAME`),
+  KEY `FK8F94A1EBA46E16CF` (`COUNTRY`),
+  CONSTRAINT `FK8F94A1EBA46E16CF` FOREIGN KEY (`COUNTRY`) REFERENCES `blc_country` (`ABBREVIATION`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_static_asset
+CREATE TABLE IF NOT EXISTS `blc_static_asset` (
+  `STATIC_ASSET_ID` bigint(20) NOT NULL,
+  `ALT_TEXT` varchar(255) DEFAULT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `FILE_EXTENSION` varchar(255) DEFAULT NULL,
+  `FILE_SIZE` bigint(20) DEFAULT NULL,
+  `FULL_URL` varchar(255) NOT NULL,
+  `MIME_TYPE` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `STORAGE_TYPE` varchar(255) DEFAULT NULL,
+  `TITLE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`STATIC_ASSET_ID`),
+  KEY `ASST_FULL_URL_INDX` (`FULL_URL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_static_asset_desc
+CREATE TABLE IF NOT EXISTS `blc_static_asset_desc` (
+  `STATIC_ASSET_DESC_ID` bigint(20) NOT NULL,
+  `CREATED_BY` bigint(20) DEFAULT NULL,
+  `DATE_CREATED` datetime DEFAULT NULL,
+  `DATE_UPDATED` datetime DEFAULT NULL,
+  `UPDATED_BY` bigint(20) DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `LONG_DESCRIPTION` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`STATIC_ASSET_DESC_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_store
+CREATE TABLE IF NOT EXISTS `blc_store` (
+  `STORE_ID` bigint(20) NOT NULL,
+  `ADDRESS_1` varchar(255) DEFAULT NULL,
+  `ADDRESS_2` varchar(255) DEFAULT NULL,
+  `STORE_CITY` varchar(255) DEFAULT NULL,
+  `STORE_COUNTRY` varchar(255) DEFAULT NULL,
+  `LATITUDE` double DEFAULT NULL,
+  `LONGITUDE` double DEFAULT NULL,
+  `STORE_NAME` varchar(255) NOT NULL,
+  `STORE_PHONE` varchar(255) DEFAULT NULL,
+  `STORE_STATE` varchar(255) DEFAULT NULL,
+  `STORE_ZIP` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`STORE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_system_property
+CREATE TABLE IF NOT EXISTS `blc_system_property` (
+  `BLC_SYSTEM_PROPERTY_ID` bigint(20) NOT NULL,
+  `FRIENDLY_GROUP` varchar(255) DEFAULT NULL,
+  `FRIENDLY_NAME` varchar(255) DEFAULT NULL,
+  `FRIENDLY_TAB` varchar(255) DEFAULT NULL,
+  `PROPERTY_NAME` varchar(255) NOT NULL,
+  `PROPERTY_TYPE` varchar(255) DEFAULT NULL,
+  `PROPERTY_VALUE` varchar(255) NOT NULL,
+  PRIMARY KEY (`BLC_SYSTEM_PROPERTY_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_tar_crit_offer_xref
+CREATE TABLE IF NOT EXISTS `blc_tar_crit_offer_xref` (
+  `OFFER_ID` bigint(20) NOT NULL,
+  `OFFER_ITEM_CRITERIA_ID` bigint(20) NOT NULL,
+  PRIMARY KEY (`OFFER_ID`,`OFFER_ITEM_CRITERIA_ID`),
+  UNIQUE KEY `UK_125F5803E7AB0252` (`OFFER_ITEM_CRITERIA_ID`),
+  KEY `FK125F58033615A91A` (`OFFER_ITEM_CRITERIA_ID`),
+  KEY `FK125F5803D5F3FAF4` (`OFFER_ID`),
+  CONSTRAINT `FK125F58033615A91A` FOREIGN KEY (`OFFER_ITEM_CRITERIA_ID`) REFERENCES `blc_offer_item_criteria` (`OFFER_ITEM_CRITERIA_ID`),
+  CONSTRAINT `FK125F5803D5F3FAF4` FOREIGN KEY (`OFFER_ID`) REFERENCES `blc_offer` (`OFFER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_tax_detail
+CREATE TABLE IF NOT EXISTS `blc_tax_detail` (
+  `TAX_DETAIL_ID` bigint(20) NOT NULL,
+  `AMOUNT` decimal(19,5) DEFAULT NULL,
+  `TAX_COUNTRY` varchar(255) DEFAULT NULL,
+  `JURISDICTION_NAME` varchar(255) DEFAULT NULL,
+  `RATE` decimal(19,5) DEFAULT NULL,
+  `TAX_REGION` varchar(255) DEFAULT NULL,
+  `TAX_NAME` varchar(255) DEFAULT NULL,
+  `TYPE` varchar(255) DEFAULT NULL,
+  `CURRENCY_CODE` varchar(255) DEFAULT NULL,
+  `MODULE_CONFIG_ID` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`TAX_DETAIL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_translation
+CREATE TABLE IF NOT EXISTS `blc_translation` (
+  `TRANSLATION_ID` bigint(20) NOT NULL,
+  `ENTITY_ID` varchar(255) DEFAULT NULL,
+  `ENTITY_TYPE` varchar(255) DEFAULT NULL,
+  `FIELD_NAME` varchar(255) DEFAULT NULL,
+  `LOCALE_CODE` varchar(255) DEFAULT NULL,
+  `TRANSLATED_VALUE` longtext,
+  PRIMARY KEY (`TRANSLATION_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_trans_additnl_fields
+CREATE TABLE IF NOT EXISTS `blc_trans_additnl_fields` (
+  `PAYMENT_TRANSACTION_ID` bigint(20) NOT NULL,
+  `FIELD_VALUE` longtext,
+  `FIELD_NAME` varchar(255) NOT NULL,
+  PRIMARY KEY (`PAYMENT_TRANSACTION_ID`,`FIELD_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_url_handler
+CREATE TABLE IF NOT EXISTS `blc_url_handler` (
+  `URL_HANDLER_ID` bigint(20) NOT NULL,
+  `INCOMING_URL` varchar(255) NOT NULL,
+  `NEW_URL` varchar(255) NOT NULL,
+  `URL_REDIRECT_TYPE` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`URL_HANDLER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_userconnection
+CREATE TABLE IF NOT EXISTS `blc_userconnection` (
+  `providerId` varchar(255) NOT NULL,
+  `providerUserId` varchar(255) NOT NULL,
+  `userId` varchar(255) NOT NULL,
+  `accessToken` varchar(255) NOT NULL,
+  `displayName` varchar(255) DEFAULT NULL,
+  `expireTime` bigint(20) DEFAULT NULL,
+  `imageUrl` varchar(255) DEFAULT NULL,
+  `profileUrl` varchar(255) DEFAULT NULL,
+  `rank` int(11) NOT NULL,
+  `refreshToken` varchar(255) DEFAULT NULL,
+  `secret` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`providerId`,`providerUserId`,`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+
+
+-- Dumping structure for table broadleaf.blc_zip_code
+CREATE TABLE IF NOT EXISTS `blc_zip_code` (
+  `ZIP_CODE_ID` varchar(255) NOT NULL,
+  `ZIP_CITY` varchar(255) DEFAULT NULL,
+  `ZIP_LATITUDE` double DEFAULT NULL,
+  `ZIP_LONGITUDE` double DEFAULT NULL,
+  `ZIP_STATE` varchar(255) DEFAULT NULL,
+  `ZIPCODE` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ZIP_CODE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Data exporting was unselected.
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
+CREATE TABLE `sequence_generator` (
+	`ID_NAME` VARCHAR(100) NULL,
+	`ID_VAL` INT NULL
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB;
