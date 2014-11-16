@@ -21,7 +21,7 @@
               username="root"
               password=""
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/broadleaf?useUnicode=true&amp;characterEncoding=utf8"/>
+              url="jdbc:mysql://localhost:3306/medbay?useUnicode=true&amp;characterEncoding=utf8"/>
 
     <Resource name="jdbc/storage"
               auth="Container"
@@ -43,7 +43,7 @@
               username="root"
               password=""
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/broadleaf?useUnicode=true&amp;characterEncoding=utf8"/>
+              url="jdbc:mysql://localhost:3306/medbay?useUnicode=true&amp;characterEncoding=utf8"/>
 
     <Resource name="jdbc/secure"
               auth="Container"
@@ -65,5 +65,5 @@
               username="root"
               password=""
               driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/broadleaf?useUnicode=true&amp;characterEncoding=utf8"/>            
+              url="jdbc:mysql://localhost:3306/medbay?useUnicode=true&amp;characterEncoding=utf8"/>            
 </Context>
