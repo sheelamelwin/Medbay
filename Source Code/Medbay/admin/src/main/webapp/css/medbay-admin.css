@@ -1,0 +1,47 @@
+.reportMain {
+	
+}
+
+.reportContainerTop {
+	width: 500px;
+	text-align: top;
+	float: left;
+}
+
+.reportContainerBottom {
+	text-align: top;
+	float: left;
+}
+
+.reportTable {
+	background-color: #f3efeb;
+	width: 100%;
+}
+
+.reportTable td {
+	height: 5px;
+	color: #808080;
+}
+
+.reportTable th {
+	height: 5px;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #B9B9B9;
+}
+
+.reportTable .headerRow {
+	font-size: 12px;
+	font-weight: bold;
+	background-color: #e9e9e9;
+}
+
+.reportTable .footerRow {
+	text-align: right;
+	font-weight: bold;
+	font-size: 8px;
+}
+
+.reportTable .footerRow .labelRight {
+	text-align: right;
+}

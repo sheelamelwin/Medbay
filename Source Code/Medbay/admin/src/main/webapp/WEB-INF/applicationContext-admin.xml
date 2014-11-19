@@ -119,7 +119,20 @@
             </list>
         </property>
     </bean>
-	
+	<bean id="blMyAdminCssLocations" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>/css/</value>
+            </list>
+        </property>
+    </bean> 
+    
+     <bean class="org.broadleafcommerce.common.extensibility.context.merge.LateStageMergeBeanPostProcessor">
+        <property name="collectionRef" value="blMyAdminCssLocations" />
+        <property name="targetRef" value="blCssLocations" />            
+    </bean>
+    
+
 	<bean id="blJsResources" class="org.broadleafcommerce.common.web.resource.BroadleafResourceHttpRequestHandler">
         <property name="handlers">
             <list>
@@ -128,11 +141,26 @@
             </list>
         </property>
         <property name="locations" ref="blJsLocations" />
-    </bean>
-    
+    </bean>            
+	
     <bean id="blCssResources" class="org.broadleafcommerce.common.web.resource.BroadleafResourceHttpRequestHandler">
         <property name="locations" ref="blCssLocations"/>
     </bean>
+    
+    
+    <bean id="blMyAdminCssFileList" class="org.springframework.beans.factory.config.ListFactoryBean">
+        <property name="sourceList">
+            <list>
+                <value>medbay-admin.css</value>
+            </list>
+        </property>  
+    </bean>
+    
+    <bean class="org.broadleafcommerce.common.extensibility.context.merge.LateStageMergeBeanPostProcessor">
+        <property name="collectionRef" value="blMyAdminCssFileList" />
+        <property name="targetRef" value="blCssFileList" />            
+    </bean>
+    
     
     <bean id="blJsFileMap" class="org.springframework.beans.factory.config.MapFactoryBean">
         <property name="sourceMap">
@@ -142,6 +170,7 @@
             </map>
         </property>  
     </bean>
+    
     
     <bean id="blResourceBundlingService" class="org.broadleafcommerce.common.resource.service.ResourceBundlingServiceImpl">
         <property name="additionalBundleFiles" ref="blJsFileMap"/>
