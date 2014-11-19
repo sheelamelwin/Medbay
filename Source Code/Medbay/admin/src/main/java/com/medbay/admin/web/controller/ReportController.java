@@ -115,6 +115,8 @@ public class ReportController extends AdminAbstractController {
     public String viewOrderDetails(HttpServletRequest request, Model model, @PathVariable("id") String id,@PathVariable Map<String, String> pathVars) throws Exception{
 		
 		setModelAttributes(model, SECTION_KEY);
+		Order order = null;
+		CustomerAddress customerAddress = null;
 		
 		String sectionClassName = getClassNameForSection(CLASS_NAME);
 		
@@ -127,9 +129,15 @@ public class ReportController extends AdminAbstractController {
         Map<String, DynamicResultSet> subRecordsMap = service.getRecordsForAllSubCollections(ppr, entity, crumbs);
 
         EntityForm entityForm = formService.createEntityForm(cmd, entity, subRecordsMap, crumbs);
+        entityForm.setReadOnly();
         
-		Order order= orderService.findOrderById(Long.parseLong(id));
-		CustomerAddress customerAddress = order.getCustomer().getCustomerAddresses().get(0);
+		order = orderService.findOrderById(Long.parseLong(id));
+		
+		if (order!=null){
+			if (order.getCustomer()!=null && order.getCustomer().getCustomerAddresses()!=null && order.getCustomer().getCustomerAddresses().size()>0){
+				customerAddress = order.getCustomer().getCustomerAddresses().get(0);
+			}
+		}		
 			
 		model.addAttribute("order",order);
 		model.addAttribute("shipmentAddress",customerAddress);
