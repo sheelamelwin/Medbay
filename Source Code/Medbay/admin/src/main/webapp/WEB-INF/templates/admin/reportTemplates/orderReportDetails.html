@@ -2,6 +2,10 @@
 	<div th:substituteby="layout/partials/stickyHeader" />
 	<section class="main" th:if="${order==null}">No Info available</section>
 	<section class="main" th:if="${order!=null}">
+		<div class="row"><div style="float:left"><input type="button" value="Print" id="btnPrint" /></div>
+		</div>
+		
+		<div id="printableDiv">
 		<div class="row">
 			<div class="reportMain">
 				<!-- main top div-->
@@ -140,6 +144,7 @@
 
 			</div>
 			<!--end bottom main div-->
+		</div>
 		</div>
 		<!-- row end -->
 	</section>
