@@ -1,0 +1,43 @@
+<div class="section-container" role="main">
+	<div th:substituteby="layout/partials/stickyHeader" />
+	<section class="main" th:if="${order==null}">No Info available</section>
+	<section class="main" th:if="${order!=null}">	
+	<div th:substituteby="layout/partials/headerFlash" />
+	<blc:form th:object="${entityForm}" method="POST"  th:action="@{${currentUrl}}">
+	
+	<input type="hidden" th:field="*{ceilingEntityClassname}" />
+    <input type="hidden" th:field="*{entityType}" />
+    <input type="hidden" th:field="*{id}" />
+    <input type="hidden" th:field="*{sectionCrumbs}"  />
+    <input type="hidden" th:field="*{mainEntityName}" />
+    <div class="row">  
+        <button id="btnSaveStatus" class="small button radius dark submit-button" data-url="update-order" type="submit">
+            &nbsp;Save
+        </button>
+    </div>
+    <div class="row">
+		<div class="reportMain">		
+			<div class="reportContainerTop" th:object="${order}">
+				<table class="reportTable">
+					<tr>
+						<td><b>Order Id</b></td>
+						<td th:text="${order.id}"></td>							
+					</tr>
+					<tr>
+						<td><b>Order Status</b></td>
+						<td>
+							<select id="status" name="status" size="1" style="width: 120px;">                  
+                   				<option th:each="orderStatus: ${orderStatusList}" th:value="${orderStatus}" th:text="${orderStatus}"
+                   				 th:selected="${orderStatus==order.status.friendlyType}">
+                   				</option>
+                			</select>
+						</td>
+					</tr>						
+				</table>
+			</div>
+		</div>	
+		<!-- row end -->		
+		</div>
+	</blc:form>
+	</section>
+</div>
