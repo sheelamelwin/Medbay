@@ -1,7 +1,6 @@
 package com.medbay.admin.web.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +23,6 @@ import org.broadleafcommerce.openadmin.server.domain.PersistencePackageRequest;
 import org.broadleafcommerce.openadmin.server.security.remote.EntityOperationType;
 import org.broadleafcommerce.openadmin.web.controller.AdminAbstractController;
 import org.broadleafcommerce.openadmin.web.form.component.ListGrid;
-import org.broadleafcommerce.openadmin.web.form.entity.DefaultEntityFormActions;
 import org.broadleafcommerce.openadmin.web.form.entity.DefaultMainActions;
 import org.broadleafcommerce.openadmin.web.form.entity.EntityForm;
 import org.broadleafcommerce.openadmin.web.form.entity.EntityFormAction;
@@ -32,13 +30,14 @@ import org.broadleafcommerce.openadmin.web.form.entity.Field;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.medbay.admin.email.service.AdminEmailService;
+
 
 /**
  * The controller responsible for viewing reports
@@ -53,6 +52,9 @@ public class OrderUpdateController extends AdminAbstractController {
 	
 	@Resource(name = "blOrderService")
     OrderService orderService;
+	
+	@Resource(name = "mbAdminEmailService")
+    protected AdminEmailService adminEmailService;
 	
 	
 	/**
@@ -182,7 +184,7 @@ public class OrderUpdateController extends AdminAbstractController {
 				orderStatus = orderStatus.trim();
 				if (order!=null){
 					
-					if (orderStatus.equals(OrderStatus.CANCELLED.getFriendlyType())){						
+					if (orderStatus.equals(OrderStatus.CANCELLED.getFriendlyType())){
 						order.setStatus(OrderStatus.CANCELLED);						
 					}else if (orderStatus.equals(OrderStatus.SUBMITTED.getFriendlyType())){
 						order.setStatus(OrderStatus.SUBMITTED);	
@@ -196,6 +198,8 @@ public class OrderUpdateController extends AdminAbstractController {
 						order.setStatus(OrderStatus.QUOTE);	
 					}
 						orderService.save(order, false);
+						adminEmailService.sendOrderStatusChangeEmail(orderStatus,order.getStatus().getFriendlyType());
+			
 				}
 			}
 			
@@ -247,21 +251,5 @@ public class OrderUpdateController extends AdminAbstractController {
         }
         
         return canCreate;
-    }   
-	
-    protected List<Map<String,String>> getOrderStatusValues(){
-    	
-    	List<Map<String,String>> orderStatusList = new ArrayList<Map<String,String>>();
-    	Map<String,String> statusMap = new HashMap<String,String>();
-    	
-    	/*statusMap.put("id","")
-    	orderStatusList.add(OrderStatus.SUBMITTED.getFriendlyType());
-		orderStatusList.add(OrderStatus.CANCELLED.getFriendlyType());
-		orderStatusList.add(OrderStatus.IN_PROCESS.getFriendlyType());
-		orderStatusList.add(OrderStatus.CSR_OWNED.getFriendlyType());
-		orderStatusList.add(OrderStatus.NAMED.getFriendlyType());
-		orderStatusList.add(OrderStatus.QUOTE.getFriendlyType());
-*/    	
-    	return orderStatusList;
     }
 }
