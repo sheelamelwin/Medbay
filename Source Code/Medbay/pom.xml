@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mycompany</groupId>
+    <groupId>com.medbay</groupId>
     <artifactId>ecommerce-website</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
@@ -13,7 +13,7 @@
         <blc.version>3.1.8-GA</blc.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <description>My Company's eCommerce Website</description>
+    <description>Medbay eCommerce Website</description>
     <repositories>
         <repository>
             <id>public snapshots</id>
@@ -195,7 +195,7 @@
             </dependency>
             
             <dependency>
-                <groupId>com.mycompany</groupId>
+                <groupId>com.medbay</groupId>
                 <artifactId>core</artifactId>
                 <version>1.0</version>
                 <type>jar</type>
