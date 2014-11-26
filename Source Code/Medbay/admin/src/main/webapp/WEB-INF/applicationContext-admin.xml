@@ -134,7 +134,7 @@
 
 	<bean id="mbOrderStatusChangeEmailInfo" parent="blEmailInfo">
 		<property name="subject" value="Order Status Changed!"/>
-		<property name="emailTemplate" value="orderStatutusChange-email"/>
+		<property name="emailTemplate" value="orderStatusChange-email"/>
 	</bean>
     
     <bean id="blPrecompressedArtifactFilter" class="org.broadleafcommerce.common.web.util.PrecompressedArtifactFilter"/>

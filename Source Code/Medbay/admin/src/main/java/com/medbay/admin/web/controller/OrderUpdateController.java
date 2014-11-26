@@ -45,7 +45,7 @@ import com.medbay.admin.email.service.AdminEmailService;
 @Controller
 @RequestMapping("/" + OrderUpdateController.SECTION_KEY)
 public class OrderUpdateController extends AdminAbstractController {
-    
+	
 	protected static final String SECTION_KEY = "update-order";
 	
 	protected static final String CLASS_NAME = "Order";
@@ -197,13 +197,18 @@ public class OrderUpdateController extends AdminAbstractController {
 					}else if (orderStatus.equals(OrderStatus.QUOTE.getFriendlyType())){
 						order.setStatus(OrderStatus.QUOTE);	
 					}
+						
 						orderService.save(order, false);
-						adminEmailService.sendOrderStatusChangeEmail(orderStatus,order.getStatus().getFriendlyType());
-			
+						
+						adminEmailService.sendOrderStatusChangeEmail(order.getEmailAddress(),id,orderStatus,order.getStatus().getFriendlyType());
+						
+						if (order.getEmailAddress()!=null){
+							ra.addFlashAttribute("headerFlash", "save.successful");
+						}else{
+							ra.addFlashAttribute("headerFlash", "save.noEmail");
+						}
 				}
 			}
-			
-			ra.addFlashAttribute("headerFlash", "save.successful");     
 	        
 			return "redirect:/" + SECTION_KEY;
 	 }
